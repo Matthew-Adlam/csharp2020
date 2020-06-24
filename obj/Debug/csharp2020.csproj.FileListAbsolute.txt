@@ -1,0 +1,10 @@
+C:\Users\matthewadlam\source\repos\csharp2020\bin\Debug\csharp2020.exe.config
+C:\Users\matthewadlam\source\repos\csharp2020\bin\Debug\csharp2020.exe
+C:\Users\matthewadlam\source\repos\csharp2020\bin\Debug\csharp2020.pdb
+C:\Users\matthewadlam\source\repos\csharp2020\obj\Debug\csharp2020.csprojAssemblyReference.cache
+C:\Users\matthewadlam\source\repos\csharp2020\obj\Debug\csharp2020.Form1.resources
+C:\Users\matthewadlam\source\repos\csharp2020\obj\Debug\csharp2020.Properties.Resources.resources
+C:\Users\matthewadlam\source\repos\csharp2020\obj\Debug\csharp2020.csproj.GenerateResource.cache
+C:\Users\matthewadlam\source\repos\csharp2020\obj\Debug\csharp2020.csproj.CoreCompileInputs.cache
+C:\Users\matthewadlam\source\repos\csharp2020\obj\Debug\csharp2020.exe
+C:\Users\matthewadlam\source\repos\csharp2020\obj\Debug\csharp2020.pdb
