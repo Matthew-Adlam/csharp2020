@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,9 +23,11 @@ namespace csharp2020
         bool right;
         bool gameInProgress = false;
         string move;
+        string name;
         int lives;
         int score;
         int difficulty = 3;
+        int highScore = 0;
 
         public Form1()
         {
@@ -49,6 +52,14 @@ namespace csharp2020
             easyNButton.Visible = false;
             mediumNButton.Visible = false;
             hardNButton.Visible = false;
+            easyFButton.Enabled = false;
+            mediumFButton.Enabled = false;
+            hardFButton.Enabled = false;
+            easyNButton.Enabled = false;
+            mediumNButton.Enabled = false;
+            hardNButton.Enabled = false;
+            stopButton.Enabled = false;
+            stopButton.Visible = false;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -129,27 +140,31 @@ namespace csharp2020
                 TmrPlanet.Enabled = false;
                 TmrShip.Enabled = false;
                 MessageBox.Show("Game Over");
+
+                if(score > highScore)
+                {
+                    MessageBox.Show("Congratulations, you got a new high score of " + "" + score + "" + "!");
+                    highScore = score;
+                }
             }
         }
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            if (gameInProgress == false)
-            {
-                TmrPlanet.Enabled = true;
-                TmrShip.Enabled = true;
-                startButton.Text = "Pause";
-                lives = difficulty;
-                score = 0;
-                gameInProgress = true;
-            }
-            else if (gameInProgress == true)
-            {
-                TmrPlanet.Enabled = false;
-                TmrShip.Enabled = false;
-                startButton.Text = "Start";
-                gameInProgress = false;
-            }
+            StartGame();
+        }
+
+        void StartGame()
+        {
+            TmrPlanet.Enabled = true;
+            TmrShip.Enabled = true;
+            lives = difficulty;
+            score = 0;
+            gameInProgress = true;
+            startButton.Visible = false;
+            startButton.Enabled = false;
+            stopButton.Visible = true;
+            stopButton.Enabled = true;
         }
 
         private void instructButton_Click(object sender, EventArgs e)
@@ -159,7 +174,7 @@ namespace csharp2020
 
         private void easyNButton_Click(object sender, EventArgs e)
         {
-            difficulty = 1;
+            difficulty = 3;
             PnlGame.Visible = true;
             startButton.Visible = true;
             instructButton.Visible = true;
@@ -181,12 +196,46 @@ namespace csharp2020
 
         private void mediumNButton_Click(object sender, EventArgs e)
         {
-            
+            difficulty = 2;
+            PnlGame.Visible = true;
+            startButton.Visible = true;
+            instructButton.Visible = true;
+            txtLives.Visible = true;
+            txtScore.Visible = true;
+            TxtName.Visible = true;
+            lblLives.Visible = true;
+            lblName.Visible = true;
+            lblScore.Visible = true;
+
+            lblDifficulty.Visible = false;
+            easyFButton.Visible = false;
+            mediumFButton.Visible = false;
+            hardFButton.Visible = false;
+            easyNButton.Visible = false;
+            mediumNButton.Visible = false;
+            hardNButton.Visible = false;
         }
 
         private void hardNButton_Click(object sender, EventArgs e)
         {
+            difficulty = 1;
+            PnlGame.Visible = true;
+            startButton.Visible = true;
+            instructButton.Visible = true;
+            txtLives.Visible = true;
+            txtScore.Visible = true;
+            TxtName.Visible = true;
+            lblLives.Visible = true;
+            lblName.Visible = true;
+            lblScore.Visible = true;
 
+            lblDifficulty.Visible = false;
+            easyFButton.Visible = false;
+            mediumFButton.Visible = false;
+            hardFButton.Visible = false;
+            easyNButton.Visible = false;
+            mediumNButton.Visible = false;
+            hardNButton.Visible = false;
         }
 
         private void easyFButton_Click(object sender, EventArgs e)
@@ -208,6 +257,7 @@ namespace csharp2020
         {
             TmrPlanet.Enabled = false;
             TmrShip.Enabled = false;
+
             PnlGame.Visible = false;
             startButton.Visible = false;
             instructButton.Visible = false;
@@ -217,6 +267,7 @@ namespace csharp2020
             lblLives.Visible = false;
             lblName.Visible = false;
             lblScore.Visible = false;
+            settingsButton.Visible = false;
 
             lblDifficulty.Visible = true;
             easyFButton.Visible = true;
@@ -225,6 +276,57 @@ namespace csharp2020
             easyNButton.Visible = true;
             mediumNButton.Visible = true;
             hardNButton.Visible = true;
+
+            easyFButton.Enabled = true;
+            mediumFButton.Enabled = true;
+            hardFButton.Enabled = true;
+            easyNButton.Enabled = true;
+            mediumNButton.Enabled = true;
+            hardNButton.Enabled = true;
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            TmrPlanet.Enabled = false;
+            TmrShip.Enabled = false;
+            stopButton.Visible = false;
+            stopButton.Enabled = false;
+            startButton.Enabled = true;
+            startButton.Visible = true;
+        }
+
+        private void TxtName_TextChanged(object sender, EventArgs e)
+        {
+            {
+
+                string context = TxtName.Text;
+                bool isletter = true;
+                //for loop checks for letters as characters are entered
+                for (int i = 0; i < context.Length; i++)
+                {
+                    if (!char.IsLetter(context[i]))// if current character not a letter
+                    {
+                        isletter = false;//make isletter false
+                        break; // exit the for loop
+                    }
+
+                }
+
+                // if not a letter clear the textbox and focus on it
+                // to enter name again
+                if (isletter == false)
+                {
+                    TxtName.Clear();
+                    TxtName.Focus();
+                    MessageBox.Show("Please enter a valid username - one with only letters");
+                }
+                else
+                {
+                    context = name;
+                }
+
+            }
+
         }
     }
 }
