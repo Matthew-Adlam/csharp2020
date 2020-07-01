@@ -49,6 +49,11 @@
             this.instructButton = new System.Windows.Forms.Button();
             this.settingsButton = new System.Windows.Forms.Button();
             this.stopButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblHighScore = new System.Windows.Forms.Label();
+            this.highScoreLbl = new System.Windows.Forms.Label();
+            this.lblCodeRedeem = new System.Windows.Forms.Label();
+            this.codeRedeemer = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // PnlGame
@@ -176,7 +181,7 @@
             // lblLives
             // 
             this.lblLives.AutoSize = true;
-            this.lblLives.Location = new System.Drawing.Point(652, 369);
+            this.lblLives.Location = new System.Drawing.Point(652, 438);
             this.lblLives.Name = "lblLives";
             this.lblLives.Size = new System.Drawing.Size(13, 13);
             this.lblLives.TabIndex = 4;
@@ -185,7 +190,7 @@
             // txtLives
             // 
             this.txtLives.AutoSize = true;
-            this.txtLives.Location = new System.Drawing.Point(642, 341);
+            this.txtLives.Location = new System.Drawing.Point(642, 406);
             this.txtLives.Name = "txtLives";
             this.txtLives.Size = new System.Drawing.Size(35, 13);
             this.txtLives.TabIndex = 5;
@@ -244,11 +249,59 @@
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(690, 474);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.TabIndex = 17;
+            // 
+            // lblHighScore
+            // 
+            this.lblHighScore.AutoSize = true;
+            this.lblHighScore.Location = new System.Drawing.Point(652, 378);
+            this.lblHighScore.Name = "lblHighScore";
+            this.lblHighScore.Size = new System.Drawing.Size(13, 13);
+            this.lblHighScore.TabIndex = 18;
+            this.lblHighScore.Text = "0";
+            // 
+            // highScoreLbl
+            // 
+            this.highScoreLbl.AutoSize = true;
+            this.highScoreLbl.Location = new System.Drawing.Point(637, 340);
+            this.highScoreLbl.Name = "highScoreLbl";
+            this.highScoreLbl.Size = new System.Drawing.Size(60, 13);
+            this.highScoreLbl.TabIndex = 19;
+            this.highScoreLbl.Text = "High Score";
+            // 
+            // lblCodeRedeem
+            // 
+            this.lblCodeRedeem.AutoSize = true;
+            this.lblCodeRedeem.Location = new System.Drawing.Point(619, 474);
+            this.lblCodeRedeem.Name = "lblCodeRedeem";
+            this.lblCodeRedeem.Size = new System.Drawing.Size(87, 13);
+            this.lblCodeRedeem.TabIndex = 20;
+            this.lblCodeRedeem.Text = "Code Redeemer:";
+            // 
+            // codeRedeemer
+            // 
+            this.codeRedeemer.Location = new System.Drawing.Point(622, 502);
+            this.codeRedeemer.Name = "codeRedeemer";
+            this.codeRedeemer.Size = new System.Drawing.Size(100, 20);
+            this.codeRedeemer.TabIndex = 21;
+            this.codeRedeemer.TextChanged += new System.EventHandler(this.codeRedeemer_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 561);
+            this.Controls.Add(this.codeRedeemer);
+            this.Controls.Add(this.lblCodeRedeem);
+            this.Controls.Add(this.highScoreLbl);
+            this.Controls.Add(this.lblHighScore);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.stopButton);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.instructButton);
@@ -300,6 +353,11 @@
         private System.Windows.Forms.Button easyNButton;
         private System.Windows.Forms.Button settingsButton;
         private System.Windows.Forms.Button stopButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblHighScore;
+        private System.Windows.Forms.Label highScoreLbl;
+        private System.Windows.Forms.Label lblCodeRedeem;
+        private System.Windows.Forms.TextBox codeRedeemer;
     }
 }
 

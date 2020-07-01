@@ -17,7 +17,7 @@ namespace csharp2020
         //Create a constructor (initialises the values of the fields)
         public Spaceship()
         {
-            x = 10;
+            x = 200;
             y = 360;
             width = 40;
             height = 40;
@@ -36,10 +36,10 @@ namespace csharp2020
 
             if (move == "right")
             {
-                if (spaceRec.Location.X > 450) // is spaceship within 50 of right side
+                if (spaceRec.Location.X > 550) // is spaceship within 50 of right side
                 {
 
-                    x = 450;
+                    x = 550;
                     spaceRec.Location = new Point(x, y);
                 }
                 else
@@ -63,7 +63,35 @@ namespace csharp2020
                         spaceRec.Location = new Point(x, y);
                     }
                 }
-                spaceRec.Location = new Point(x, y);
+            if (move == "down")
+            {
+                if (spaceRec.Location.Y > 490) // is spaceship within 10 of left side
+                {
+
+                    y = 490;
+                    spaceRec.Location = new Point(x, y);
+                }
+                else
+                {
+                    y -= 5;
+                    spaceRec.Location = new Point(x, y);
+                }
+            }
+            if (move == "down")
+            {
+                if (spaceRec.Location.Y < 10) // is spaceship within 10 of left side
+                {
+
+                    y = 10;
+                    spaceRec.Location = new Point(x, y);
+                }
+                else
+                {
+                    y += 5;
+                    spaceRec.Location = new Point(x, y);
+                }
+            }
+            spaceRec.Location = new Point(x, y);
         }
 
     }

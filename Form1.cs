@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace csharp2020
 
         bool left;
         bool right;
+        bool up;
+        bool down;
         bool gameInProgress = false;
         string move;
         string name;
@@ -28,10 +31,15 @@ namespace csharp2020
         int score;
         int difficulty = 3;
         int highScore = 0;
+        int scoreSetBack = 0;
+        int scoreBoost = 0;
 
         public Form1()
         {
             InitializeComponent();
+
+            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlGame, new object[] { true });
+
             for (int i = 0; i < 8; i++)
             {
                 int x = 10 + (i * 75);
@@ -109,6 +117,8 @@ namespace csharp2020
         {
             if (e.KeyData == Keys.Left) { left = true; }
             if (e.KeyData == Keys.Right) { right = true; }
+            if (e.KeyData == Keys.Up) { up = true; }
+            if (e.KeyData == Keys.Down) { down = true; }
 
         }
 
@@ -116,6 +126,8 @@ namespace csharp2020
         {
             if (e.KeyData == Keys.Left) { left = false; }
             if (e.KeyData == Keys.Right) { right = false; }
+            if (e.KeyData == Keys.Up) { up = false; }
+            if (e.KeyData == Keys.Down) { down = false; }
 
         }
 
@@ -129,6 +141,16 @@ namespace csharp2020
             if (left) // if left arrow key pressed
             {
                 move = "left";
+                spaceship.MoveSpaceship(move);
+            }
+            if (up) // if right arrow key pressed
+            {
+                move = "up";
+                spaceship.MoveSpaceship(move);
+            }
+            if (down) // if left arrow key pressed
+            {
+                move = "down";
                 spaceship.MoveSpaceship(move);
             }
 
@@ -145,6 +167,7 @@ namespace csharp2020
                 {
                     MessageBox.Show("Congratulations, you got a new high score of " + "" + score + "" + "!");
                     highScore = score;
+                    lblHighScore.Text = highScore.ToString();
                 }
             }
         }
@@ -159,7 +182,8 @@ namespace csharp2020
             TmrPlanet.Enabled = true;
             TmrShip.Enabled = true;
             lives = difficulty;
-            score = 0;
+            lblLives.Text = lives.ToString();// display number of lives
+            score = 0 + scoreBoost - scoreSetBack;
             gameInProgress = true;
             startButton.Visible = false;
             startButton.Enabled = false;
@@ -184,6 +208,7 @@ namespace csharp2020
             lblLives.Visible = true;
             lblName.Visible = true;
             lblScore.Visible = true;
+            settingsButton.Visible = true;
 
             lblDifficulty.Visible = false;
             easyFButton.Visible = false;
@@ -206,6 +231,7 @@ namespace csharp2020
             lblLives.Visible = true;
             lblName.Visible = true;
             lblScore.Visible = true;
+            settingsButton.Visible = true;
 
             lblDifficulty.Visible = false;
             easyFButton.Visible = false;
@@ -228,6 +254,7 @@ namespace csharp2020
             lblLives.Visible = true;
             lblName.Visible = true;
             lblScore.Visible = true;
+            settingsButton.Visible = true;
 
             lblDifficulty.Visible = false;
             easyFButton.Visible = false;
@@ -268,6 +295,7 @@ namespace csharp2020
             lblName.Visible = false;
             lblScore.Visible = false;
             settingsButton.Visible = false;
+            stopButton.Visible = false;
 
             lblDifficulty.Visible = true;
             easyFButton.Visible = true;
@@ -327,6 +355,15 @@ namespace csharp2020
 
             }
 
+        }
+
+        private void codeRedeemer_TextChanged(object sender, EventArgs e)
+        {
+            if (codeRedeemer.Text == "Geo" || codeRedeemer.Text == "geo" )
+            {
+                scoreBoost = 5;
+                MessageBox.Show("Give Credit to Ryan");
+            }
         }
     }
 }
