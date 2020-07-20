@@ -16,7 +16,7 @@ namespace csharp2020
     {
 
         Graphics g; //declare a graphics object called g
-        Planet[] planet = new Planet[8];
+        Planet[] planet = new Planet[10];
         Random yspeed = new Random();
         Spaceship spaceship = new Spaceship();
 
@@ -27,6 +27,8 @@ namespace csharp2020
         bool gameInProgress = false;
         string move;
         string name;
+        int speedMin = 5;
+        int speedMax = 20;
         int lives;
         int score;
         int difficulty = 3;
@@ -40,9 +42,9 @@ namespace csharp2020
 
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, PnlGame, new object[] { true });
 
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 10; i++)
             {
-                int x = 10 + (i * 75);
+                int x = 10 + (i * 60);
                 planet[i] = new Planet(x);
             }
 
@@ -75,9 +77,9 @@ namespace csharp2020
             //get the graphics used to paint on the panel control
             g = e.Graphics;
             //call the Planet class's DrawPlanet method to draw the image planet1 
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 10; i++)
             {
-                int rndmspeed = yspeed.Next(5, 20);
+                int rndmspeed = yspeed.Next(speedMin, speedMax);
                 planet[i].y += rndmspeed;
 
                 //call the Planet class's drawPlanet method to draw the images
@@ -89,7 +91,7 @@ namespace csharp2020
 
         private void TmrPlanet_Tick(object sender, EventArgs e)
         {
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 10; i++)
             {
                 planet[i].MovePlanet();
                 if (spaceship.spaceRec.IntersectsWith(planet[i].planetRec))
@@ -161,7 +163,7 @@ namespace csharp2020
             {
                 TmrPlanet.Enabled = false;
                 TmrShip.Enabled = false;
-                MessageBox.Show("Game Over");
+                MessageBox.Show("Game Over, you got a score of" + "" + score + "" + "!");
 
                 if(score > highScore)
                 {
@@ -184,16 +186,19 @@ namespace csharp2020
             lives = difficulty;
             lblLives.Text = lives.ToString();// display number of lives
             score = 0 + scoreBoost - scoreSetBack;
+            lblScore.Text = score.ToString();
             gameInProgress = true;
             startButton.Visible = false;
             startButton.Enabled = false;
             stopButton.Visible = true;
             stopButton.Enabled = true;
+
         }
 
         private void instructButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("actually put something");
+            MessageBox.Show("In this game, you control a spaceship attempting to dodge planets, or use the missile to shoot them. If you are hit by one of the planets, you lose a life.");
+            MessageBox.Show("Try not to lose all of your lives! Click the settings button to change difficulty, or game mode. Click Start to begin the game, or enter a code at the code redeemer.");
         }
 
         private void easyNButton_Click(object sender, EventArgs e)
@@ -296,6 +301,10 @@ namespace csharp2020
             lblScore.Visible = false;
             settingsButton.Visible = false;
             stopButton.Visible = false;
+            lblHighScore.Visible = false;
+            highScoreLbl.Visible = false;
+            codeRedeemer.Visible = false;
+            lblCodeRedeem.Visible = false;
 
             lblDifficulty.Visible = true;
             easyFButton.Visible = true;
@@ -362,8 +371,19 @@ namespace csharp2020
             if (codeRedeemer.Text == "Geo" || codeRedeemer.Text == "geo" )
             {
                 scoreBoost = 5;
-                MessageBox.Show("Give Credit to Ryan");
+                MessageBox.Show("Give Credit to Ryan - +5 points");
+            }
+            if (codeRedeemer.Text == "Josh" || codeRedeemer.Text == "josh")
+            {
+                speedMin = 1;
+                speedMax = 15;
+                MessageBox.Show("Planets Slowed Down.");
             }
         }
     }
 }
+//pastebin
+//            codeRedeemer.Enabled = false;
+//TxtName.Enabled = false;
+ //           instructButton.Enabled = false;
+ //           settingsButton.Enabled = false;
