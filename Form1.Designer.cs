@@ -47,13 +47,13 @@
             this.txtScore = new System.Windows.Forms.Label();
             this.startButton = new System.Windows.Forms.Button();
             this.instructButton = new System.Windows.Forms.Button();
-            this.settingsButton = new System.Windows.Forms.Button();
-            this.stopButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblHighScore = new System.Windows.Forms.Label();
             this.highScoreLbl = new System.Windows.Forms.Label();
             this.lblCodeRedeem = new System.Windows.Forms.Label();
             this.codeRedeemer = new System.Windows.Forms.TextBox();
+            this.settingsButton = new System.Windows.Forms.Button();
+            this.tmrShoot = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // PnlGame
@@ -227,28 +227,6 @@
             this.instructButton.UseVisualStyleBackColor = true;
             this.instructButton.Click += new System.EventHandler(this.instructButton_Click);
             // 
-            // settingsButton
-            // 
-            this.settingsButton.BackgroundImage = global::csharp2020.Properties.Resources.settings;
-            this.settingsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.settingsButton.Location = new System.Drawing.Point(622, 12);
-            this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(75, 59);
-            this.settingsButton.TabIndex = 9;
-            this.settingsButton.UseVisualStyleBackColor = true;
-            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
-            // 
-            // stopButton
-            // 
-            this.stopButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.stopButton.Location = new System.Drawing.Point(607, 142);
-            this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(115, 50);
-            this.stopButton.TabIndex = 16;
-            this.stopButton.Text = "Pause";
-            this.stopButton.UseVisualStyleBackColor = true;
-            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -292,6 +270,21 @@
             this.codeRedeemer.TabIndex = 21;
             this.codeRedeemer.TextChanged += new System.EventHandler(this.codeRedeemer_TextChanged);
             // 
+            // settingsButton
+            // 
+            this.settingsButton.BackgroundImage = global::csharp2020.Properties.Resources.settings;
+            this.settingsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.settingsButton.Location = new System.Drawing.Point(622, 12);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(75, 59);
+            this.settingsButton.TabIndex = 9;
+            this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            // 
+            // tmrShoot
+            // 
+            this.tmrShoot.Tick += new System.EventHandler(this.tmrShoot_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -302,7 +295,6 @@
             this.Controls.Add(this.highScoreLbl);
             this.Controls.Add(this.lblHighScore);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.stopButton);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.instructButton);
             this.Controls.Add(this.startButton);
@@ -326,6 +318,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -352,12 +346,12 @@
         private System.Windows.Forms.Button hardNButton;
         private System.Windows.Forms.Button easyNButton;
         private System.Windows.Forms.Button settingsButton;
-        private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblHighScore;
         private System.Windows.Forms.Label highScoreLbl;
         private System.Windows.Forms.Label lblCodeRedeem;
         private System.Windows.Forms.TextBox codeRedeemer;
+        private System.Windows.Forms.Timer tmrShoot;
     }
 }
 

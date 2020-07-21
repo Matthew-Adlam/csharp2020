@@ -20,6 +20,8 @@ namespace csharp2020
         Random yspeed = new Random();
         Spaceship spaceship = new Spaceship();
 
+        List<Missile> missiles = new List<Missile>();
+
         bool left;
         bool right;
         bool up;
@@ -47,6 +49,11 @@ namespace csharp2020
                 int x = 10 + (i * 60);
                 planet[i] = new Planet(x);
             }
+            foreach (Missile m in missiles)
+            {
+                m.draw(g);
+            }
+
 
         }
 
@@ -68,8 +75,6 @@ namespace csharp2020
             easyNButton.Enabled = false;
             mediumNButton.Enabled = false;
             hardNButton.Enabled = false;
-            stopButton.Enabled = false;
-            stopButton.Visible = false;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -106,6 +111,7 @@ namespace csharp2020
                 if (planet[i].y >= PnlGame.Height)
                 {
                     score += 1;//update the score
+                    checkScore();
                     lblScore.Text = score.ToString();// display score
                     planet[i].y = 30;
                 }
@@ -121,6 +127,11 @@ namespace csharp2020
             if (e.KeyData == Keys.Right) { right = true; }
             if (e.KeyData == Keys.Up) { up = true; }
             if (e.KeyData == Keys.Down) { down = true; }
+            if (e.KeyData == Keys.Escape)
+            {
+                stopGame();
+                MessageBox.Show("Game Paused.");
+            }
 
         }
 
@@ -130,6 +141,38 @@ namespace csharp2020
             if (e.KeyData == Keys.Right) { right = false; }
             if (e.KeyData == Keys.Up) { up = false; }
             if (e.KeyData == Keys.Down) { down = false; }
+
+        }
+
+        public void stopGame()
+        {
+            TmrPlanet.Enabled = false;
+            TmrShip.Enabled = false;
+            startButton.Enabled = true;
+        }
+
+        public void checkScore()
+        {
+            if (score == 20 || score > 20 && score < 50) // if the score is greater than or equal to 20 but MUST be less than 50
+            {
+                speedMin = 10;
+                speedMax = 35;
+            }
+            if (score == 50 || score > 50 && score < 100) // if the score is greater than or equal to 50 but MUST be less than 100
+            {
+                speedMin = 25;
+                speedMax = 50;
+            }
+            if (score == 100 || score > 100 && score < 250) //if the score is greater than or equal to 100 but must be less than 250
+            {
+                speedMin = 40;
+                speedMax = 75;
+            }
+            if (score == 250 || score > 250 && score < 500) //if the score is greater than or equal to 100 but must be less than 250
+            {
+                speedMin = 50;
+                speedMax = 100;
+            }
 
         }
 
@@ -171,6 +214,9 @@ namespace csharp2020
                     highScore = score;
                     lblHighScore.Text = highScore.ToString();
                 }
+
+                score = 0;
+                codeRedeemer.Text = "";
             }
         }
 
@@ -188,11 +234,11 @@ namespace csharp2020
             score = 0 + scoreBoost - scoreSetBack;
             lblScore.Text = score.ToString();
             gameInProgress = true;
-            startButton.Visible = false;
             startButton.Enabled = false;
-            stopButton.Visible = true;
-            stopButton.Enabled = true;
-
+            codeRedeemer.Enabled = false;
+            TxtName.Enabled = false;
+            settingsButton.Enabled = false;
+            instructButton.Enabled = false;
         }
 
         private void instructButton_Click(object sender, EventArgs e)
@@ -300,7 +346,6 @@ namespace csharp2020
             lblName.Visible = false;
             lblScore.Visible = false;
             settingsButton.Visible = false;
-            stopButton.Visible = false;
             lblHighScore.Visible = false;
             highScoreLbl.Visible = false;
             codeRedeemer.Visible = false;
@@ -326,8 +371,6 @@ namespace csharp2020
         {
             TmrPlanet.Enabled = false;
             TmrShip.Enabled = false;
-            stopButton.Visible = false;
-            stopButton.Enabled = false;
             startButton.Enabled = true;
             startButton.Visible = true;
         }
@@ -379,6 +422,29 @@ namespace csharp2020
                 speedMax = 15;
                 MessageBox.Show("Planets Slowed Down.");
             }
+            if (codeRedeemer.Text == "jquery")
+            {
+                scoreSetBack = 999;
+                MessageBox.Show("Just No.");
+            }
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                missiles.Add(new Missile(spaceship.spaceRec));
+            }
+
+        }
+
+        private void tmrShoot_Tick(object sender, EventArgs e)
+        {
+            this.Invalidate();
         }
     }
 }
