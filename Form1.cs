@@ -27,6 +27,7 @@ namespace csharp2020
         bool up;
         bool down;
         bool gameInProgress = false;
+        bool fighterMode = false;
         string move;
         string name;
         int speedMin = 5;
@@ -49,10 +50,7 @@ namespace csharp2020
                 int x = 10 + (i * 60);
                 planet[i] = new Planet(x);
             }
-            foreach (Missile m in missiles)
-            {
-                m.draw(g);
-            }
+       
 
 
         }
@@ -168,10 +166,15 @@ namespace csharp2020
                 speedMin = 40;
                 speedMax = 75;
             }
-            if (score == 250 || score > 250 && score < 500) //if the score is greater than or equal to 100 but must be less than 250
+            if (score == 250 || score > 250 && score < 500) //if the score is greater than or equal to 250 but must be less than 500
             {
                 speedMin = 50;
                 speedMax = 100;
+            }
+            if (score == 500 || score > 500) // gotta go fast
+            {
+                speedMin = 100;
+                speedMax = 200;
             }
 
         }
@@ -227,24 +230,35 @@ namespace csharp2020
 
         void StartGame()
         {
-            TmrPlanet.Enabled = true;
-            TmrShip.Enabled = true;
-            lives = difficulty;
-            lblLives.Text = lives.ToString();// display number of lives
-            score = 0 + scoreBoost - scoreSetBack;
-            lblScore.Text = score.ToString();
-            gameInProgress = true;
-            startButton.Enabled = false;
-            codeRedeemer.Enabled = false;
-            TxtName.Enabled = false;
-            settingsButton.Enabled = false;
-            instructButton.Enabled = false;
+            if (fighterMode == false)
+            {
+                TmrPlanet.Enabled = true;
+                TmrShip.Enabled = true;
+                lives = difficulty;
+                lblLives.Text = lives.ToString();// display number of lives
+                score = 0 + scoreBoost - scoreSetBack;
+                lblScore.Text = score.ToString();
+                gameInProgress = true;
+                startButton.Enabled = false;
+                codeRedeemer.Enabled = false;
+                TxtName.Enabled = false;
+                settingsButton.Enabled = false;
+                instructButton.Enabled = false;
+            }
+            if (fighterMode == true)
+            {
+                // add stuff here
+            }
+
         }
 
         private void instructButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("In this game, you control a spaceship attempting to dodge planets, or use the missile to shoot them. If you are hit by one of the planets, you lose a life.");
+            MessageBox.Show("In normal mode, you control a spaceship attempting to dodge planets, or use the missile to shoot them. If you are hit by one of the planets, you lose a life.");
+            MessageBox.Show("Use the arrow keys to control the spaceship, and use the escape key to pause.");
+            MessageBox.Show("If you select fighter mode, you engage in a 1v1 versus the AI in a duel! Click the buttons to perform moves to kill the planet before it kills you!");
             MessageBox.Show("Try not to lose all of your lives! Click the settings button to change difficulty, or game mode. Click Start to begin the game, or enter a code at the code redeemer.");
+            MessageBox.Show("Use code Geo or geo for +5 score!");
         }
 
         private void easyNButton_Click(object sender, EventArgs e)
@@ -420,7 +434,7 @@ namespace csharp2020
             {
                 speedMin = 1;
                 speedMax = 15;
-                MessageBox.Show("Planets Slowed Down.");
+                MessageBox.Show("Planets Slowed Down - coward");
             }
             if (codeRedeemer.Text == "jquery")
             {
@@ -431,6 +445,8 @@ namespace csharp2020
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
+           // spaceship.MoveSpaceship(e.X);
+          //  this.Invalidate();
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)

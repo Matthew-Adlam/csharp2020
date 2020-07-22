@@ -73,11 +73,11 @@ namespace csharp2020
                 }
                 else
                 {
-                    y -= 5;
+                    y += 5;
                     spaceRec.Location = new Point(x, y);
                 }
             }
-            if (move == "down")
+            if (move == "up")
             {
                 if (spaceRec.Location.Y < 10) // is spaceship within 10 of left side
                 {
@@ -87,7 +87,7 @@ namespace csharp2020
                 }
                 else
                 {
-                    y += 5;
+                    y -= 5;
                     spaceRec.Location = new Point(x, y);
                 }
             }
