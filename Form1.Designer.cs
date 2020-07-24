@@ -54,11 +54,20 @@
             this.codeRedeemer = new System.Windows.Forms.TextBox();
             this.settingsButton = new System.Windows.Forms.Button();
             this.tmrShoot = new System.Windows.Forms.Timer(this.components);
+            this.LblFightAiHp = new System.Windows.Forms.Label();
+            this.LblFightUserHp = new System.Windows.Forms.Label();
+            this.EnemyHp = new System.Windows.Forms.Label();
+            this.UserHp = new System.Windows.Forms.Label();
+            this.PnlGame.SuspendLayout();
             this.SuspendLayout();
             // 
             // PnlGame
             // 
             this.PnlGame.BackColor = System.Drawing.Color.Silver;
+            this.PnlGame.Controls.Add(this.UserHp);
+            this.PnlGame.Controls.Add(this.EnemyHp);
+            this.PnlGame.Controls.Add(this.LblFightUserHp);
+            this.PnlGame.Controls.Add(this.LblFightAiHp);
             this.PnlGame.Location = new System.Drawing.Point(1, 1);
             this.PnlGame.Name = "PnlGame";
             this.PnlGame.Size = new System.Drawing.Size(600, 500);
@@ -247,11 +256,11 @@
             // highScoreLbl
             // 
             this.highScoreLbl.AutoSize = true;
-            this.highScoreLbl.Location = new System.Drawing.Point(637, 340);
+            this.highScoreLbl.Location = new System.Drawing.Point(627, 340);
             this.highScoreLbl.Name = "highScoreLbl";
-            this.highScoreLbl.Size = new System.Drawing.Size(60, 13);
+            this.highScoreLbl.Size = new System.Drawing.Size(63, 13);
             this.highScoreLbl.TabIndex = 19;
-            this.highScoreLbl.Text = "High Score";
+            this.highScoreLbl.Text = "High Score:";
             // 
             // lblCodeRedeem
             // 
@@ -284,6 +293,42 @@
             // tmrShoot
             // 
             this.tmrShoot.Tick += new System.EventHandler(this.tmrShoot_Tick);
+            // 
+            // LblFightAiHp
+            // 
+            this.LblFightAiHp.AutoSize = true;
+            this.LblFightAiHp.Location = new System.Drawing.Point(452, 178);
+            this.LblFightAiHp.Name = "LblFightAiHp";
+            this.LblFightAiHp.Size = new System.Drawing.Size(76, 13);
+            this.LblFightAiHp.TabIndex = 22;
+            this.LblFightAiHp.Text = "Enemy Health:";
+            // 
+            // LblFightUserHp
+            // 
+            this.LblFightUserHp.AutoSize = true;
+            this.LblFightUserHp.Location = new System.Drawing.Point(70, 178);
+            this.LblFightUserHp.Name = "LblFightUserHp";
+            this.LblFightUserHp.Size = new System.Drawing.Size(66, 13);
+            this.LblFightUserHp.TabIndex = 23;
+            this.LblFightUserHp.Text = "Your Health:";
+            // 
+            // EnemyHp
+            // 
+            this.EnemyHp.AutoSize = true;
+            this.EnemyHp.Location = new System.Drawing.Point(483, 218);
+            this.EnemyHp.Name = "EnemyHp";
+            this.EnemyHp.Size = new System.Drawing.Size(13, 13);
+            this.EnemyHp.TabIndex = 24;
+            this.EnemyHp.Text = "0";
+            // 
+            // UserHp
+            // 
+            this.UserHp.AutoSize = true;
+            this.UserHp.Location = new System.Drawing.Point(95, 209);
+            this.UserHp.Name = "UserHp";
+            this.UserHp.Size = new System.Drawing.Size(13, 13);
+            this.UserHp.TabIndex = 25;
+            this.UserHp.Text = "0";
             // 
             // Form1
             // 
@@ -320,6 +365,8 @@
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
+            this.PnlGame.ResumeLayout(false);
+            this.PnlGame.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -352,6 +399,10 @@
         private System.Windows.Forms.Label lblCodeRedeem;
         private System.Windows.Forms.TextBox codeRedeemer;
         private System.Windows.Forms.Timer tmrShoot;
+        private System.Windows.Forms.Label LblFightAiHp;
+        private System.Windows.Forms.Label UserHp;
+        private System.Windows.Forms.Label EnemyHp;
+        private System.Windows.Forms.Label LblFightUserHp;
     }
 }
 

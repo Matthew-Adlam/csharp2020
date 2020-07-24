@@ -73,22 +73,28 @@ namespace csharp2020
             easyNButton.Enabled = false;
             mediumNButton.Enabled = false;
             hardNButton.Enabled = false;
+            LblFightAiHp.Visible = false;
+            LblFightUserHp.Visible = false;
+            UserHp.Visible = false;
+            EnemyHp.Visible = false;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             //get the graphics used to paint on the panel control
             g = e.Graphics;
-            //call the Planet class's DrawPlanet method to draw the image planet1 
-            for (int i = 0; i < 10; i++)
+            if (fighterMode == false)
             {
-                int rndmspeed = yspeed.Next(speedMin, speedMax);
-                planet[i].y += rndmspeed;
+                for (int i = 0; i < 10; i++)
+                {
+                    int rndmspeed = yspeed.Next(speedMin, speedMax);
+                    planet[i].y += rndmspeed;
 
-                //call the Planet class's drawPlanet method to draw the images
-                planet[i].DrawPlanet(g);
+                    //call the Planet class's drawPlanet method to draw the images
+                    planet[i].DrawPlanet(g);
+                }
+                spaceship.DrawSpaceship(g);
             }
-            spaceship.DrawSpaceship(g);
 
         }
 
@@ -247,23 +253,26 @@ namespace csharp2020
             }
             if (fighterMode == true)
             {
-                // add stuff here
+                TmrPlanet.Enabled = false;
+                TmrShip.Enabled = false;
+                
             }
 
         }
 
         private void instructButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("In normal mode, you control a spaceship attempting to dodge planets, or use the missile to shoot them. If you are hit by one of the planets, you lose a life.");
+            MessageBox.Show("In normal mode, you control a spaceship attempting to dodge planets, or use the missile to shoot them. If you are hit by one of the planets, you lose a life. Try not to lose all of your lives!");
             MessageBox.Show("Use the arrow keys to control the spaceship, and use the escape key to pause.");
             MessageBox.Show("If you select fighter mode, you engage in a 1v1 versus the AI in a duel! Click the buttons to perform moves to kill the planet before it kills you!");
-            MessageBox.Show("Try not to lose all of your lives! Click the settings button to change difficulty, or game mode. Click Start to begin the game, or enter a code at the code redeemer.");
-            MessageBox.Show("Use code Geo or geo for +5 score!");
+            MessageBox.Show("Click the settings button to change difficulty, or game mode. Click Start to begin the game, or enter a code at the code redeemer.");
+            MessageBox.Show("Use code Geo or geo for +5 score! (Normal only)");
         }
 
         private void easyNButton_Click(object sender, EventArgs e)
         {
             difficulty = 3;
+            fighterMode = false;
             PnlGame.Visible = true;
             startButton.Visible = true;
             instructButton.Visible = true;
@@ -287,6 +296,7 @@ namespace csharp2020
         private void mediumNButton_Click(object sender, EventArgs e)
         {
             difficulty = 2;
+            fighterMode = false;
             PnlGame.Visible = true;
             startButton.Visible = true;
             instructButton.Visible = true;
@@ -310,6 +320,7 @@ namespace csharp2020
         private void hardNButton_Click(object sender, EventArgs e)
         {
             difficulty = 1;
+            fighterMode = false;
             PnlGame.Visible = true;
             startButton.Visible = true;
             instructButton.Visible = true;
@@ -332,7 +343,25 @@ namespace csharp2020
 
         private void easyFButton_Click(object sender, EventArgs e)
         {
+            fighterMode = true;
+            PnlGame.Visible = false;
+            startButton.Visible = false;
+            instructButton.Visible = false;
+            txtLives.Visible = false;
+            txtScore.Visible = false;
+            TxtName.Visible = false;
+            lblLives.Visible = false;
+            lblName.Visible = false;
+            lblScore.Visible = false;
+            settingsButton.Visible = false;
 
+            lblDifficulty.Visible = false;
+            easyFButton.Visible = false;
+            mediumFButton.Visible = false;
+            hardFButton.Visible = false;
+            easyNButton.Visible = false;
+            mediumNButton.Visible = false;
+            hardNButton.Visible = false;
         }
 
         private void normalFButton_Click(object sender, EventArgs e)
