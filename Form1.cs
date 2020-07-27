@@ -28,6 +28,10 @@ namespace csharp2020
         bool down;
         bool gameInProgress = false;
         bool fighterMode = false;
+        bool offensive = false;
+        bool defensive = false;
+        bool control = false;
+        bool sneaky = false;
         string move;
         string name;
         int speedMin = 5;
@@ -77,6 +81,14 @@ namespace csharp2020
             LblFightUserHp.Visible = false;
             UserHp.Visible = false;
             EnemyHp.Visible = false;
+            userCharacter.Visible = false;
+            aiCharacter.Visible = false;
+            offensiveChoice.Visible = false;
+            defensiveChoice.Visible = false;
+            controlChoice.Visible = false;
+            sneakyChoice.Visible = false;
+            LblClassChoice.Visible = false;
+            confirmBtn.Visible = false;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -134,7 +146,11 @@ namespace csharp2020
             if (e.KeyData == Keys.Escape)
             {
                 stopGame();
-                MessageBox.Show("Game Paused.");
+                MessageBox.Show("Game Paused. Press R to resume.");
+            }
+            if (e.KeyData == Keys.R)
+            {
+                StartGame();
             }
 
         }
@@ -362,6 +378,12 @@ namespace csharp2020
             easyNButton.Visible = false;
             mediumNButton.Visible = false;
             hardNButton.Visible = false;
+
+            offensiveChoice.Visible = true;
+            defensiveChoice.Visible = true;
+            controlChoice.Visible = true;
+            sneakyChoice.Visible = true;
+            LblClassChoice.Visible = true;
         }
 
         private void normalFButton_Click(object sender, EventArgs e)
@@ -490,6 +512,18 @@ namespace csharp2020
         private void tmrShoot_Tick(object sender, EventArgs e)
         {
             this.Invalidate();
+        }
+
+        private void offensiveChoice_Click(object sender, EventArgs e)
+        {
+            offensive = true;
+            MessageBox.Show("Offensive Class. Very attack focused.");
+            confirmBtn.Visible = true;
+        }
+
+        private void confirmBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

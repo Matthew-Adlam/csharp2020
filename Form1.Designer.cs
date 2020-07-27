@@ -30,6 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.PnlGame = new System.Windows.Forms.Panel();
+            this.UserHp = new System.Windows.Forms.Label();
+            this.EnemyHp = new System.Windows.Forms.Label();
+            this.LblFightUserHp = new System.Windows.Forms.Label();
+            this.LblFightAiHp = new System.Windows.Forms.Label();
             this.easyFButton = new System.Windows.Forms.Button();
             this.hardFButton = new System.Windows.Forms.Button();
             this.mediumFButton = new System.Windows.Forms.Button();
@@ -54,16 +58,30 @@
             this.codeRedeemer = new System.Windows.Forms.TextBox();
             this.settingsButton = new System.Windows.Forms.Button();
             this.tmrShoot = new System.Windows.Forms.Timer(this.components);
-            this.LblFightAiHp = new System.Windows.Forms.Label();
-            this.LblFightUserHp = new System.Windows.Forms.Label();
-            this.EnemyHp = new System.Windows.Forms.Label();
-            this.UserHp = new System.Windows.Forms.Label();
+            this.userCharacter = new System.Windows.Forms.PictureBox();
+            this.aiCharacter = new System.Windows.Forms.PictureBox();
+            this.offensiveChoice = new System.Windows.Forms.Button();
+            this.LblClassChoice = new System.Windows.Forms.Label();
+            this.sneakyChoice = new System.Windows.Forms.Button();
+            this.controlChoice = new System.Windows.Forms.Button();
+            this.defensiveChoice = new System.Windows.Forms.Button();
+            this.confirmBtn = new System.Windows.Forms.Button();
             this.PnlGame.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userCharacter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aiCharacter)).BeginInit();
             this.SuspendLayout();
             // 
             // PnlGame
             // 
             this.PnlGame.BackColor = System.Drawing.Color.Silver;
+            this.PnlGame.Controls.Add(this.confirmBtn);
+            this.PnlGame.Controls.Add(this.defensiveChoice);
+            this.PnlGame.Controls.Add(this.controlChoice);
+            this.PnlGame.Controls.Add(this.sneakyChoice);
+            this.PnlGame.Controls.Add(this.LblClassChoice);
+            this.PnlGame.Controls.Add(this.offensiveChoice);
+            this.PnlGame.Controls.Add(this.aiCharacter);
+            this.PnlGame.Controls.Add(this.userCharacter);
             this.PnlGame.Controls.Add(this.UserHp);
             this.PnlGame.Controls.Add(this.EnemyHp);
             this.PnlGame.Controls.Add(this.LblFightUserHp);
@@ -73,6 +91,46 @@
             this.PnlGame.Size = new System.Drawing.Size(600, 500);
             this.PnlGame.TabIndex = 0;
             this.PnlGame.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // UserHp
+            // 
+            this.UserHp.AutoSize = true;
+            this.UserHp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserHp.Location = new System.Drawing.Point(119, 158);
+            this.UserHp.Name = "UserHp";
+            this.UserHp.Size = new System.Drawing.Size(18, 20);
+            this.UserHp.TabIndex = 25;
+            this.UserHp.Text = "0";
+            // 
+            // EnemyHp
+            // 
+            this.EnemyHp.AutoSize = true;
+            this.EnemyHp.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EnemyHp.Location = new System.Drawing.Point(472, 158);
+            this.EnemyHp.Name = "EnemyHp";
+            this.EnemyHp.Size = new System.Drawing.Size(18, 20);
+            this.EnemyHp.TabIndex = 24;
+            this.EnemyHp.Text = "0";
+            // 
+            // LblFightUserHp
+            // 
+            this.LblFightUserHp.AutoSize = true;
+            this.LblFightUserHp.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblFightUserHp.Location = new System.Drawing.Point(70, 115);
+            this.LblFightUserHp.Name = "LblFightUserHp";
+            this.LblFightUserHp.Size = new System.Drawing.Size(114, 24);
+            this.LblFightUserHp.TabIndex = 23;
+            this.LblFightUserHp.Text = "Your Health:";
+            // 
+            // LblFightAiHp
+            // 
+            this.LblFightAiHp.AutoSize = true;
+            this.LblFightAiHp.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblFightAiHp.Location = new System.Drawing.Point(419, 115);
+            this.LblFightAiHp.Name = "LblFightAiHp";
+            this.LblFightAiHp.Size = new System.Drawing.Size(134, 24);
+            this.LblFightAiHp.TabIndex = 22;
+            this.LblFightAiHp.Text = "Enemy Health:";
             // 
             // easyFButton
             // 
@@ -294,41 +352,91 @@
             // 
             this.tmrShoot.Tick += new System.EventHandler(this.tmrShoot_Tick);
             // 
-            // LblFightAiHp
+            // userCharacter
             // 
-            this.LblFightAiHp.AutoSize = true;
-            this.LblFightAiHp.Location = new System.Drawing.Point(452, 178);
-            this.LblFightAiHp.Name = "LblFightAiHp";
-            this.LblFightAiHp.Size = new System.Drawing.Size(76, 13);
-            this.LblFightAiHp.TabIndex = 22;
-            this.LblFightAiHp.Text = "Enemy Health:";
+            this.userCharacter.BackColor = System.Drawing.Color.Transparent;
+            this.userCharacter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.userCharacter.Image = global::csharp2020.Properties.Resources.alien1;
+            this.userCharacter.Location = new System.Drawing.Point(84, 228);
+            this.userCharacter.Name = "userCharacter";
+            this.userCharacter.Size = new System.Drawing.Size(100, 84);
+            this.userCharacter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.userCharacter.TabIndex = 22;
+            this.userCharacter.TabStop = false;
             // 
-            // LblFightUserHp
+            // aiCharacter
             // 
-            this.LblFightUserHp.AutoSize = true;
-            this.LblFightUserHp.Location = new System.Drawing.Point(70, 178);
-            this.LblFightUserHp.Name = "LblFightUserHp";
-            this.LblFightUserHp.Size = new System.Drawing.Size(66, 13);
-            this.LblFightUserHp.TabIndex = 23;
-            this.LblFightUserHp.Text = "Your Health:";
+            this.aiCharacter.BackColor = System.Drawing.Color.Transparent;
+            this.aiCharacter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.aiCharacter.Image = global::csharp2020.Properties.Resources.planet1;
+            this.aiCharacter.Location = new System.Drawing.Point(423, 228);
+            this.aiCharacter.Name = "aiCharacter";
+            this.aiCharacter.Size = new System.Drawing.Size(100, 84);
+            this.aiCharacter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.aiCharacter.TabIndex = 26;
+            this.aiCharacter.TabStop = false;
             // 
-            // EnemyHp
+            // offensiveChoice
             // 
-            this.EnemyHp.AutoSize = true;
-            this.EnemyHp.Location = new System.Drawing.Point(483, 218);
-            this.EnemyHp.Name = "EnemyHp";
-            this.EnemyHp.Size = new System.Drawing.Size(13, 13);
-            this.EnemyHp.TabIndex = 24;
-            this.EnemyHp.Text = "0";
+            this.offensiveChoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.offensiveChoice.Location = new System.Drawing.Point(31, 293);
+            this.offensiveChoice.Name = "offensiveChoice";
+            this.offensiveChoice.Size = new System.Drawing.Size(115, 50);
+            this.offensiveChoice.TabIndex = 27;
+            this.offensiveChoice.Text = "Offensive";
+            this.offensiveChoice.UseVisualStyleBackColor = true;
+            this.offensiveChoice.Click += new System.EventHandler(this.offensiveChoice_Click);
             // 
-            // UserHp
+            // LblClassChoice
             // 
-            this.UserHp.AutoSize = true;
-            this.UserHp.Location = new System.Drawing.Point(95, 209);
-            this.UserHp.Name = "UserHp";
-            this.UserHp.Size = new System.Drawing.Size(13, 13);
-            this.UserHp.TabIndex = 25;
-            this.UserHp.Text = "0";
+            this.LblClassChoice.AutoSize = true;
+            this.LblClassChoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblClassChoice.Location = new System.Drawing.Point(204, 198);
+            this.LblClassChoice.Name = "LblClassChoice";
+            this.LblClassChoice.Size = new System.Drawing.Size(149, 24);
+            this.LblClassChoice.TabIndex = 28;
+            this.LblClassChoice.Text = "Choose A Class:";
+            // 
+            // sneakyChoice
+            // 
+            this.sneakyChoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sneakyChoice.Location = new System.Drawing.Point(438, 293);
+            this.sneakyChoice.Name = "sneakyChoice";
+            this.sneakyChoice.Size = new System.Drawing.Size(115, 50);
+            this.sneakyChoice.TabIndex = 29;
+            this.sneakyChoice.Text = "Sneaky";
+            this.sneakyChoice.UseVisualStyleBackColor = true;
+            // 
+            // controlChoice
+            // 
+            this.controlChoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.controlChoice.Location = new System.Drawing.Point(302, 293);
+            this.controlChoice.Name = "controlChoice";
+            this.controlChoice.Size = new System.Drawing.Size(115, 50);
+            this.controlChoice.TabIndex = 30;
+            this.controlChoice.Text = "Control";
+            this.controlChoice.UseVisualStyleBackColor = true;
+            // 
+            // defensiveChoice
+            // 
+            this.defensiveChoice.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.defensiveChoice.Location = new System.Drawing.Point(170, 293);
+            this.defensiveChoice.Name = "defensiveChoice";
+            this.defensiveChoice.Size = new System.Drawing.Size(115, 50);
+            this.defensiveChoice.TabIndex = 31;
+            this.defensiveChoice.Text = "Defensive";
+            this.defensiveChoice.UseVisualStyleBackColor = true;
+            // 
+            // confirmBtn
+            // 
+            this.confirmBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.confirmBtn.Location = new System.Drawing.Point(225, 377);
+            this.confirmBtn.Name = "confirmBtn";
+            this.confirmBtn.Size = new System.Drawing.Size(128, 73);
+            this.confirmBtn.TabIndex = 32;
+            this.confirmBtn.Text = "Confirm Class";
+            this.confirmBtn.UseVisualStyleBackColor = true;
+            this.confirmBtn.Click += new System.EventHandler(this.confirmBtn_Click);
             // 
             // Form1
             // 
@@ -367,6 +475,8 @@
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.PnlGame.ResumeLayout(false);
             this.PnlGame.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userCharacter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aiCharacter)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -403,6 +513,14 @@
         private System.Windows.Forms.Label UserHp;
         private System.Windows.Forms.Label EnemyHp;
         private System.Windows.Forms.Label LblFightUserHp;
+        private System.Windows.Forms.PictureBox userCharacter;
+        private System.Windows.Forms.PictureBox aiCharacter;
+        private System.Windows.Forms.Button defensiveChoice;
+        private System.Windows.Forms.Button controlChoice;
+        private System.Windows.Forms.Button sneakyChoice;
+        private System.Windows.Forms.Label LblClassChoice;
+        private System.Windows.Forms.Button offensiveChoice;
+        private System.Windows.Forms.Button confirmBtn;
     }
 }
 
