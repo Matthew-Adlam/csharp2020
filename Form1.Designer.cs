@@ -42,17 +42,28 @@
             this.instructButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.settingsButton = new System.Windows.Forms.Button();
-            this.userCharacter = new System.Windows.Forms.PictureBox();
-            this.aiCharacter = new System.Windows.Forms.PictureBox();
-            this.bossyLbl = new System.Windows.Forms.Label();
             this.controlBtn = new System.Windows.Forms.Button();
             this.offBtn = new System.Windows.Forms.Button();
             this.defButton = new System.Windows.Forms.Button();
             this.sneakyBtn = new System.Windows.Forms.Button();
             this.classLbl = new System.Windows.Forms.Label();
             this.conBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.userCharacter)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aiCharacter)).BeginInit();
+            this.bossyLbl = new System.Windows.Forms.Label();
+            this.instructLbl = new System.Windows.Forms.Label();
+            this.alien = new System.Windows.Forms.PictureBox();
+            this.planetAi = new System.Windows.Forms.PictureBox();
+            this.userhealthLbl = new System.Windows.Forms.Label();
+            this.enemyhealthLbl = new System.Windows.Forms.Label();
+            this.userHpLbl = new System.Windows.Forms.Label();
+            this.enemyHpLbl = new System.Windows.Forms.Label();
+            this.move1 = new System.Windows.Forms.Button();
+            this.move2 = new System.Windows.Forms.Button();
+            this.move3 = new System.Windows.Forms.Button();
+            this.move4 = new System.Windows.Forms.Button();
+            this.move5 = new System.Windows.Forms.Button();
+            this.moveInfo = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.alien)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.planetAi)).BeginInit();
             this.SuspendLayout();
             // 
             // UserHp
@@ -197,40 +208,6 @@
             this.settingsButton.UseVisualStyleBackColor = true;
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
-            // userCharacter
-            // 
-            this.userCharacter.BackColor = System.Drawing.Color.Transparent;
-            this.userCharacter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.userCharacter.Image = global::csharp2020.Properties.Resources.alien1;
-            this.userCharacter.Location = new System.Drawing.Point(84, 228);
-            this.userCharacter.Name = "userCharacter";
-            this.userCharacter.Size = new System.Drawing.Size(100, 84);
-            this.userCharacter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.userCharacter.TabIndex = 22;
-            this.userCharacter.TabStop = false;
-            // 
-            // aiCharacter
-            // 
-            this.aiCharacter.BackColor = System.Drawing.Color.Transparent;
-            this.aiCharacter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.aiCharacter.Image = global::csharp2020.Properties.Resources.planet1;
-            this.aiCharacter.Location = new System.Drawing.Point(423, 228);
-            this.aiCharacter.Name = "aiCharacter";
-            this.aiCharacter.Size = new System.Drawing.Size(100, 84);
-            this.aiCharacter.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.aiCharacter.TabIndex = 26;
-            this.aiCharacter.TabStop = false;
-            // 
-            // bossyLbl
-            // 
-            this.bossyLbl.AutoSize = true;
-            this.bossyLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bossyLbl.Location = new System.Drawing.Point(18, 46);
-            this.bossyLbl.Name = "bossyLbl";
-            this.bossyLbl.Size = new System.Drawing.Size(672, 25);
-            this.bossyLbl.TabIndex = 18;
-            this.bossyLbl.Text = "Welcome to Fight Club!  Press the instructions button for how to play!";
-            // 
             // controlBtn
             // 
             this.controlBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -276,7 +253,7 @@
             // 
             this.classLbl.AutoSize = true;
             this.classLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.classLbl.Location = new System.Drawing.Point(81, 112);
+            this.classLbl.Location = new System.Drawing.Point(81, 127);
             this.classLbl.Name = "classLbl";
             this.classLbl.Size = new System.Drawing.Size(584, 24);
             this.classLbl.TabIndex = 23;
@@ -295,11 +272,165 @@
             this.conBtn.UseVisualStyleBackColor = false;
             this.conBtn.Click += new System.EventHandler(this.conBtn_Click);
             // 
+            // bossyLbl
+            // 
+            this.bossyLbl.AutoSize = true;
+            this.bossyLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bossyLbl.Location = new System.Drawing.Point(18, 46);
+            this.bossyLbl.Name = "bossyLbl";
+            this.bossyLbl.Size = new System.Drawing.Size(672, 25);
+            this.bossyLbl.TabIndex = 18;
+            this.bossyLbl.Text = "Welcome to Fight Club!  Press the instructions button for how to play!";
+            // 
+            // instructLbl
+            // 
+            this.instructLbl.AutoSize = true;
+            this.instructLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.instructLbl.Location = new System.Drawing.Point(64, 71);
+            this.instructLbl.Name = "instructLbl";
+            this.instructLbl.Size = new System.Drawing.Size(484, 25);
+            this.instructLbl.TabIndex = 25;
+            this.instructLbl.Text = "Click the Settings button to modify game settings.";
+            // 
+            // alien
+            // 
+            this.alien.BackgroundImage = global::csharp2020.Properties.Resources.alien1;
+            this.alien.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.alien.Location = new System.Drawing.Point(100, 187);
+            this.alien.Name = "alien";
+            this.alien.Size = new System.Drawing.Size(114, 69);
+            this.alien.TabIndex = 26;
+            this.alien.TabStop = false;
+            // 
+            // planetAi
+            // 
+            this.planetAi.BackgroundImage = global::csharp2020.Properties.Resources.planet1;
+            this.planetAi.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.planetAi.Location = new System.Drawing.Point(462, 187);
+            this.planetAi.Name = "planetAi";
+            this.planetAi.Size = new System.Drawing.Size(114, 69);
+            this.planetAi.TabIndex = 27;
+            this.planetAi.TabStop = false;
+            // 
+            // userhealthLbl
+            // 
+            this.userhealthLbl.AutoSize = true;
+            this.userhealthLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userhealthLbl.Location = new System.Drawing.Point(100, 47);
+            this.userhealthLbl.Name = "userhealthLbl";
+            this.userhealthLbl.Size = new System.Drawing.Size(114, 24);
+            this.userhealthLbl.TabIndex = 28;
+            this.userhealthLbl.Text = "Your Health:";
+            // 
+            // enemyhealthLbl
+            // 
+            this.enemyhealthLbl.AutoSize = true;
+            this.enemyhealthLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.enemyhealthLbl.Location = new System.Drawing.Point(442, 47);
+            this.enemyhealthLbl.Name = "enemyhealthLbl";
+            this.enemyhealthLbl.Size = new System.Drawing.Size(134, 24);
+            this.enemyhealthLbl.TabIndex = 29;
+            this.enemyhealthLbl.Text = "Enemy Health:";
+            // 
+            // userHpLbl
+            // 
+            this.userHpLbl.AutoSize = true;
+            this.userHpLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userHpLbl.Location = new System.Drawing.Point(137, 96);
+            this.userHpLbl.Name = "userHpLbl";
+            this.userHpLbl.Size = new System.Drawing.Size(27, 20);
+            this.userHpLbl.TabIndex = 30;
+            this.userHpLbl.Text = "10";
+            // 
+            // enemyHpLbl
+            // 
+            this.enemyHpLbl.AutoSize = true;
+            this.enemyHpLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.enemyHpLbl.Location = new System.Drawing.Point(493, 96);
+            this.enemyHpLbl.Name = "enemyHpLbl";
+            this.enemyHpLbl.Size = new System.Drawing.Size(27, 20);
+            this.enemyHpLbl.TabIndex = 31;
+            this.enemyHpLbl.Text = "10";
+            // 
+            // move1
+            // 
+            this.move1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.move1.Location = new System.Drawing.Point(48, 317);
+            this.move1.Name = "move1";
+            this.move1.Size = new System.Drawing.Size(166, 50);
+            this.move1.TabIndex = 32;
+            this.move1.Text = "Big Attack";
+            this.move1.UseVisualStyleBackColor = true;
+            this.move1.Click += new System.EventHandler(this.move1_Click);
+            // 
+            // move2
+            // 
+            this.move2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.move2.Location = new System.Drawing.Point(256, 317);
+            this.move2.Name = "move2";
+            this.move2.Size = new System.Drawing.Size(166, 50);
+            this.move2.TabIndex = 33;
+            this.move2.Text = "Decent Attack";
+            this.move2.UseVisualStyleBackColor = true;
+            // 
+            // move3
+            // 
+            this.move3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.move3.Location = new System.Drawing.Point(462, 317);
+            this.move3.Name = "move3";
+            this.move3.Size = new System.Drawing.Size(166, 50);
+            this.move3.TabIndex = 34;
+            this.move3.Text = "Strength Buff";
+            this.move3.UseVisualStyleBackColor = true;
+            // 
+            // move4
+            // 
+            this.move4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.move4.Location = new System.Drawing.Point(48, 389);
+            this.move4.Name = "move4";
+            this.move4.Size = new System.Drawing.Size(166, 53);
+            this.move4.TabIndex = 36;
+            this.move4.Text = "???";
+            this.move4.UseVisualStyleBackColor = true;
+            // 
+            // move5
+            // 
+            this.move5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.move5.Location = new System.Drawing.Point(256, 389);
+            this.move5.Name = "move5";
+            this.move5.Size = new System.Drawing.Size(166, 53);
+            this.move5.TabIndex = 37;
+            this.move5.Text = "???";
+            this.move5.UseVisualStyleBackColor = true;
+            // 
+            // moveInfo
+            // 
+            this.moveInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.moveInfo.Location = new System.Drawing.Point(462, 389);
+            this.moveInfo.Name = "moveInfo";
+            this.moveInfo.Size = new System.Drawing.Size(166, 53);
+            this.moveInfo.TabIndex = 38;
+            this.moveInfo.Text = "Move Info";
+            this.moveInfo.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 489);
+            this.Controls.Add(this.moveInfo);
+            this.Controls.Add(this.move5);
+            this.Controls.Add(this.move4);
+            this.Controls.Add(this.move3);
+            this.Controls.Add(this.move2);
+            this.Controls.Add(this.move1);
+            this.Controls.Add(this.enemyHpLbl);
+            this.Controls.Add(this.userHpLbl);
+            this.Controls.Add(this.enemyhealthLbl);
+            this.Controls.Add(this.userhealthLbl);
+            this.Controls.Add(this.planetAi);
+            this.Controls.Add(this.alien);
+            this.Controls.Add(this.instructLbl);
             this.Controls.Add(this.conBtn);
             this.Controls.Add(this.classLbl);
             this.Controls.Add(this.sneakyBtn);
@@ -325,8 +456,8 @@
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
-            ((System.ComponentModel.ISupportInitialize)(this.userCharacter)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aiCharacter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alien)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.planetAi)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -347,21 +478,28 @@
         private System.Windows.Forms.Label UserHp;
         private System.Windows.Forms.Label EnemyHp;
         private System.Windows.Forms.Label LblFightUserHp;
-        private System.Windows.Forms.PictureBox userCharacter;
-        private System.Windows.Forms.PictureBox aiCharacter;
         private System.Windows.Forms.Button defensiveChoice;
-        private System.Windows.Forms.Button controlChoice;
-        private System.Windows.Forms.Button sneakyChoice;
-        private System.Windows.Forms.Label LblClassChoice;
-        private System.Windows.Forms.Button offensiveChoice;
         private System.Windows.Forms.Button confirmBtn;
-        private System.Windows.Forms.Label bossyLbl;
         private System.Windows.Forms.Button controlBtn;
         private System.Windows.Forms.Button offBtn;
         private System.Windows.Forms.Button defButton;
         private System.Windows.Forms.Button sneakyBtn;
         private System.Windows.Forms.Label classLbl;
         private System.Windows.Forms.Button conBtn;
+        private System.Windows.Forms.Label bossyLbl;
+        private System.Windows.Forms.Label instructLbl;
+        private System.Windows.Forms.PictureBox alien;
+        private System.Windows.Forms.PictureBox planetAi;
+        private System.Windows.Forms.Label userhealthLbl;
+        private System.Windows.Forms.Label enemyhealthLbl;
+        private System.Windows.Forms.Label userHpLbl;
+        private System.Windows.Forms.Label enemyHpLbl;
+        private System.Windows.Forms.Button move1;
+        private System.Windows.Forms.Button move2;
+        private System.Windows.Forms.Button move3;
+        private System.Windows.Forms.Button move4;
+        private System.Windows.Forms.Button move5;
+        private System.Windows.Forms.Button moveInfo;
     }
 }
 

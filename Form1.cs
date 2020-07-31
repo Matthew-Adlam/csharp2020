@@ -37,6 +37,14 @@ namespace csharp2020
         int playerAttack;
         int playerDefense;
         int playerAccuracy;
+        int playerHitpoints;
+        int enemyAttack;
+        int enemyDefense;
+        int enemyAccuracy;
+        int enemyHitpoints;
+
+        Random playerAcc = new Random();
+        Random bigAttack = new Random();
 
         public Form1()
         {
@@ -63,14 +71,24 @@ namespace csharp2020
             LblFightUserHp.Visible = false;
             UserHp.Visible = false;
             EnemyHp.Visible = false;
-            userCharacter.Visible = false;
-            aiCharacter.Visible = false;
             offBtn.Visible = false;
             defButton.Visible = false;
             controlBtn.Visible = false;
             sneakyBtn.Visible = false;
             conBtn.Visible = false;
             classLbl.Visible = false;
+            planetAi.Visible = false;
+            alien.Visible = false;
+            userhealthLbl.Visible = false;
+            userHpLbl.Visible = false;
+            enemyhealthLbl.Visible = false;
+            enemyHpLbl.Visible = false;
+            move1.Visible = false;
+            move2.Visible = false;
+            move3.Visible = false;
+            move4.Visible = false;
+            move5.Visible = false;
+            moveInfo.Visible = false;
         }
 
 
@@ -146,6 +164,8 @@ namespace csharp2020
             TxtName.Visible = false;
             lblName.Visible = false;
             settingsButton.Visible = false;
+            instructLbl.Visible = false;
+            bossyLbl.Visible = false;
 
             lblDifficulty.Visible = true;
             easyFButton.Visible = true;
@@ -228,13 +248,58 @@ namespace csharp2020
         {
             if (offensive == true)
             {
+                MessageBox.Show("Selected Offensive Class.");
                 playerAttack = 9;
                 playerDefense = 4;
-                playerAccuracy = 6;
+                playerHitpoints = 50;
+                enemyHitpoints = 50; // ^^^ and this subject to change due to difficulty
                 startGame();
             }
         }
         void startGame()
+        {
+            userHpLbl.Text = playerHitpoints.ToString();
+            enemyHpLbl.Text = enemyHitpoints.ToString();
+            controlBtn.Visible = false;
+            offBtn.Visible = false;
+            sneakyBtn.Visible = false;
+            defButton.Visible = false;
+            conBtn.Visible = false;
+            classLbl.Visible = false;
+
+            alien.Visible = true;
+            planetAi.Visible = true;
+            userhealthLbl.Visible = true;
+            userHpLbl.Visible = true;
+            enemyhealthLbl.Visible = true;
+            enemyHpLbl.Visible = true;
+            move1.Visible = true;
+            move2.Visible = true;
+            move3.Visible = true;
+            move4.Visible = true;
+            move5.Visible = true;
+            moveInfo.Visible = true;
+        }
+
+        private void move1_Click(object sender, EventArgs e)
+        {
+            if(offensive == true )
+            {
+              playerAccuracy =  playerAcc.Next(1, 10);
+                if(playerAccuracy > 6)
+                {
+                    // missed
+                }
+                else
+                {
+                    playerAttack = bigAttack.Next(6, 8);
+                    enemyHitpoints -= playerAttack;
+                    enemyHpLbl.Text = enemyHitpoints.ToString();
+                }
+            }
+            enemyAttackTime();
+        }
+        void enemyAttackTime()
         {
 
         }
