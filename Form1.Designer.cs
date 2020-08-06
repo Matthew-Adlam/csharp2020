@@ -62,6 +62,8 @@
             this.move4 = new System.Windows.Forms.Button();
             this.move5 = new System.Windows.Forms.Button();
             this.moveInfo = new System.Windows.Forms.Button();
+            this.missLbl = new System.Windows.Forms.Label();
+            this.enemyMissLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.alien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.planetAi)).BeginInit();
             this.SuspendLayout();
@@ -413,11 +415,33 @@
             this.moveInfo.Text = "Move Info";
             this.moveInfo.UseVisualStyleBackColor = true;
             // 
+            // missLbl
+            // 
+            this.missLbl.AutoSize = true;
+            this.missLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.missLbl.Location = new System.Drawing.Point(281, 30);
+            this.missLbl.Name = "missLbl";
+            this.missLbl.Size = new System.Drawing.Size(41, 20);
+            this.missLbl.TabIndex = 39;
+            this.missLbl.Text = "miss";
+            // 
+            // enemyMissLbl
+            // 
+            this.enemyMissLbl.AutoSize = true;
+            this.enemyMissLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.enemyMissLbl.Location = new System.Drawing.Point(285, 57);
+            this.enemyMissLbl.Name = "enemyMissLbl";
+            this.enemyMissLbl.Size = new System.Drawing.Size(41, 20);
+            this.enemyMissLbl.TabIndex = 40;
+            this.enemyMissLbl.Text = "miss";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 489);
+            this.Controls.Add(this.enemyMissLbl);
+            this.Controls.Add(this.missLbl);
             this.Controls.Add(this.moveInfo);
             this.Controls.Add(this.move5);
             this.Controls.Add(this.move4);
@@ -500,6 +524,8 @@
         private System.Windows.Forms.Button move4;
         private System.Windows.Forms.Button move5;
         private System.Windows.Forms.Button moveInfo;
+        private System.Windows.Forms.Label missLbl;
+        private System.Windows.Forms.Label enemyMissLbl;
     }
 }
 

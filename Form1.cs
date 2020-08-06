@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -32,6 +33,8 @@ namespace csharp2020
         bool easy = true;
         bool medium = false;
         bool hard = false;
+        bool player1Turn;
+        bool player2Turn;
         string name;
 
         int playerAttack;
@@ -45,6 +48,7 @@ namespace csharp2020
 
         Random playerAcc = new Random();
         Random bigAttack = new Random();
+        Random enemyMoveRand = new Random();
 
         public Form1()
         {
@@ -279,32 +283,101 @@ namespace csharp2020
             move4.Visible = true;
             move5.Visible = true;
             moveInfo.Visible = true;
+
+            player1Turn = true;
         }
 
         private void move1_Click(object sender, EventArgs e)
         {
-            if(offensive == true )
+            if (player1Turn == true)
             {
-              playerAccuracy =  playerAcc.Next(1, 10);
-                if(playerAccuracy > 6)
+                if (offensive == true)
                 {
-                    // missed
-                }
-                else
-                {
-                    playerAttack = bigAttack.Next(6, 8);
-                    enemyHitpoints -= playerAttack;
-                    enemyHpLbl.Text = enemyHitpoints.ToString();
+                    playerAccuracy = playerAcc.Next(1, 10);
+                    if (playerAccuracy > 6)
+                    {
+                        missLbl.Text = "Player 1, You Missed!";
+                        player1Turn = false;
+                        enemyAttackTime();
+                    }
+                    if (playerAccuracy < 7)
+                    {
+                        playerAttack = bigAttack.Next(6, 8);
+                        enemyHitpoints -= playerAttack;
+                        missLbl.Text = "You hit the enemy for" + "" + playerAttack + "" + "damage!";
+                        enemyHpLbl.Text = enemyHitpoints.ToString();
+                        player1Turn = false;
+                        enemyAttackTime();
+                    }
                 }
             }
-            enemyAttackTime();
+            
         }
         void enemyAttackTime()
         {
+            move1.Enabled = false;
+            move2.Enabled = false;
+            move3.Enabled = false;
+            move4.Enabled = false;
+            move5.Enabled = false;
 
+            Thread.Sleep(2000);
+
+            enemyAccuracy = enemyMoveRand.Next(1, 10);
+
+            if (enemyAccuracy > 8)
+            {
+                enemyMissLbl.Text = "The enemy missed!";
+                player1Turn = true;
+                playerAttackTime();
+            }
+            if (enemyAccuracy < 9)
+            {
+                enemyAttack = enemyMoveRand.Next(3, 8);
+                playerHitpoints -= enemyAttack;
+                enemyMissLbl.Text = "You were hit by the enemy for" + "" + enemyAttack + "" + "damage!";
+                userHpLbl.Text = playerHitpoints.ToString();
+                player1Turn = true;
+                playerAttackTime();
+            }
+        }
+
+        void playerAttackTime()
+        {
+            move1.Enabled = true;
+            move2.Enabled = true;
+            move3.Enabled = true;
+            move4.Enabled = true;
+            move5.Enabled = true;
+        }
+
+        private void move2_Click(object sender, EventArgs e)
+        {
+            if (player1Turn == true)
+            {
+                if (offensive == true)
+                {
+                    playerAccuracy = playerAcc.Next(1, 10);
+                    if (playerAccuracy > 8)
+                    {
+                        missLbl.Text = "Player 1, You Missed!";
+                        enemyAttackTime();
+                    }
+                    if (playerAccuracy < 9)
+                    {
+                        playerAttack = bigAttack.Next(4, 7);
+                        enemyHitpoints -= playerAttack;
+                        missLbl.Text = "You hit the enemy for" + "" + playerAttack + "" + "damage!";
+                        enemyHpLbl.Text = enemyHitpoints.ToString();
+                        enemyAttackTime();
+                    }
+                }
+            }
         }
     }
+
 }
+
 //pastebin
 //            codeRedeemer.Enabled = false;
 //TxtName.Enabled = false;
