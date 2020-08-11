@@ -64,6 +64,7 @@
             this.moveInfo = new System.Windows.Forms.Button();
             this.missLbl = new System.Windows.Forms.Label();
             this.enemyMissLbl = new System.Windows.Forms.Label();
+            this.quitGame = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.alien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.planetAi)).BeginInit();
             this.SuspendLayout();
@@ -163,7 +164,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(627, 157);
+            this.lblName.Location = new System.Drawing.Point(617, 157);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(38, 13);
             this.lblName.TabIndex = 1;
@@ -182,13 +183,14 @@
             // 
             // instructButton
             // 
-            this.instructButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.instructButton.Location = new System.Drawing.Point(121, 157);
+            this.instructButton.BackColor = System.Drawing.Color.Lime;
+            this.instructButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.instructButton.Location = new System.Drawing.Point(210, 249);
             this.instructButton.Name = "instructButton";
-            this.instructButton.Size = new System.Drawing.Size(115, 50);
+            this.instructButton.Size = new System.Drawing.Size(267, 92);
             this.instructButton.TabIndex = 8;
             this.instructButton.Text = "Instructions";
-            this.instructButton.UseVisualStyleBackColor = true;
+            this.instructButton.UseVisualStyleBackColor = false;
             this.instructButton.Click += new System.EventHandler(this.instructButton_Click);
             // 
             // label1
@@ -201,13 +203,15 @@
             // 
             // settingsButton
             // 
-            this.settingsButton.BackgroundImage = global::csharp2020.Properties.Resources.settings;
-            this.settingsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.settingsButton.Location = new System.Drawing.Point(0, 94);
+            this.settingsButton.BackColor = System.Drawing.Color.Red;
+            this.settingsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.settingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settingsButton.Location = new System.Drawing.Point(210, 141);
             this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(75, 59);
+            this.settingsButton.Size = new System.Drawing.Size(267, 92);
             this.settingsButton.TabIndex = 9;
-            this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Text = "Start Game!";
+            this.settingsButton.UseVisualStyleBackColor = false;
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
             // controlBtn
@@ -374,6 +378,7 @@
             this.move2.TabIndex = 33;
             this.move2.Text = "Decent Attack";
             this.move2.UseVisualStyleBackColor = true;
+            this.move2.Click += new System.EventHandler(this.move2_Click_1);
             // 
             // move3
             // 
@@ -384,6 +389,7 @@
             this.move3.TabIndex = 34;
             this.move3.Text = "Strength Buff";
             this.move3.UseVisualStyleBackColor = true;
+            this.move3.Click += new System.EventHandler(this.move3_Click);
             // 
             // move4
             // 
@@ -392,8 +398,9 @@
             this.move4.Name = "move4";
             this.move4.Size = new System.Drawing.Size(166, 53);
             this.move4.TabIndex = 36;
-            this.move4.Text = "???";
+            this.move4.Text = "HUGE Attack";
             this.move4.UseVisualStyleBackColor = true;
+            this.move4.Click += new System.EventHandler(this.move4_Click);
             // 
             // move5
             // 
@@ -402,8 +409,9 @@
             this.move5.Name = "move5";
             this.move5.Size = new System.Drawing.Size(166, 53);
             this.move5.TabIndex = 37;
-            this.move5.Text = "???";
+            this.move5.Text = "Coming Soon!";
             this.move5.UseVisualStyleBackColor = true;
+            this.move5.Click += new System.EventHandler(this.move5_Click);
             // 
             // moveInfo
             // 
@@ -418,8 +426,9 @@
             // missLbl
             // 
             this.missLbl.AutoSize = true;
+            this.missLbl.BackColor = System.Drawing.Color.Transparent;
             this.missLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.missLbl.Location = new System.Drawing.Point(281, 30);
+            this.missLbl.Location = new System.Drawing.Point(12, 453);
             this.missLbl.Name = "missLbl";
             this.missLbl.Size = new System.Drawing.Size(41, 20);
             this.missLbl.TabIndex = 39;
@@ -428,18 +437,33 @@
             // enemyMissLbl
             // 
             this.enemyMissLbl.AutoSize = true;
+            this.enemyMissLbl.BackColor = System.Drawing.Color.Transparent;
             this.enemyMissLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.enemyMissLbl.Location = new System.Drawing.Point(285, 57);
+            this.enemyMissLbl.Location = new System.Drawing.Point(339, 460);
             this.enemyMissLbl.Name = "enemyMissLbl";
             this.enemyMissLbl.Size = new System.Drawing.Size(41, 20);
             this.enemyMissLbl.TabIndex = 40;
             this.enemyMissLbl.Text = "miss";
+            // 
+            // quitGame
+            // 
+            this.quitGame.BackColor = System.Drawing.Color.Blue;
+            this.quitGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.quitGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quitGame.Location = new System.Drawing.Point(210, 282);
+            this.quitGame.Name = "quitGame";
+            this.quitGame.Size = new System.Drawing.Size(267, 92);
+            this.quitGame.TabIndex = 41;
+            this.quitGame.Text = "Quit Game";
+            this.quitGame.UseVisualStyleBackColor = false;
+            this.quitGame.Click += new System.EventHandler(this.quitGame_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 489);
+            this.Controls.Add(this.quitGame);
             this.Controls.Add(this.enemyMissLbl);
             this.Controls.Add(this.missLbl);
             this.Controls.Add(this.moveInfo);
@@ -526,6 +550,7 @@
         private System.Windows.Forms.Button moveInfo;
         private System.Windows.Forms.Label missLbl;
         private System.Windows.Forms.Label enemyMissLbl;
+        private System.Windows.Forms.Button quitGame;
     }
 }
 

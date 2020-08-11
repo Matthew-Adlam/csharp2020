@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security;
 using System.Text;
@@ -45,6 +46,8 @@ namespace csharp2020
         int enemyDefense;
         int enemyAccuracy;
         int enemyHitpoints;
+        int strengthBuff = 0;
+        int wound = 3;
 
         Random playerAcc = new Random();
         Random bigAttack = new Random();
@@ -93,6 +96,8 @@ namespace csharp2020
             move4.Visible = false;
             move5.Visible = false;
             moveInfo.Visible = false;
+            enemyMissLbl.Visible = false;
+            missLbl.Visible = false;
         }
 
 
@@ -118,11 +123,8 @@ namespace csharp2020
 
         private void instructButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("In normal mode, you control a spaceship attempting to dodge planets, or use the missile to shoot them. If you are hit by one of the planets, you lose a life. Try not to lose all of your lives!");
-            MessageBox.Show("Use the arrow keys to control the spaceship, and use the escape key to pause.");
-            MessageBox.Show("If you select fighter mode, you engage in a 1v1 versus the AI in a duel! Click the buttons to perform moves to kill the planet before it kills you!");
-            MessageBox.Show("Click the settings button to change difficulty, or game mode. Click Start to begin the game, or enter a code at the code redeemer.");
-            MessageBox.Show("Use code Geo or geo for +5 score! (Normal only)");
+            MessageBox.Show("In this game, you engage in a 1v1 versus the AI in a duel! Click the buttons to perform moves to kill the planet before it kills you! (Health down to 0)");
+            MessageBox.Show("When you click Start, select a class and jump in! Click the moves to perform them on the planet, or click the Move Info button if you are not sure.");
         }
 
   
@@ -170,6 +172,7 @@ namespace csharp2020
             settingsButton.Visible = false;
             instructLbl.Visible = false;
             bossyLbl.Visible = false;
+            quitGame.Visible = false;
 
             lblDifficulty.Visible = true;
             easyFButton.Visible = true;
@@ -283,6 +286,8 @@ namespace csharp2020
             move4.Visible = true;
             move5.Visible = true;
             moveInfo.Visible = true;
+            missLbl.Visible = true;
+            enemyMissLbl.Visible = true;
 
             player1Turn = true;
         }
@@ -303,8 +308,8 @@ namespace csharp2020
                     if (playerAccuracy < 7)
                     {
                         playerAttack = bigAttack.Next(6, 8);
-                        enemyHitpoints -= playerAttack;
-                        missLbl.Text = "You hit the enemy for" + "" + playerAttack + "" + "damage!";
+                        enemyHitpoints -= playerAttack + strengthBuff;
+                        missLbl.Text = "You hit the enemy for" + "" + playerAttack + strengthBuff + "" + "damage!";
                         enemyHpLbl.Text = enemyHitpoints.ToString();
                         player1Turn = false;
                         enemyAttackTime();
@@ -344,6 +349,7 @@ namespace csharp2020
 
         void playerAttackTime()
         {
+            player1Turn = true;
             move1.Enabled = true;
             move2.Enabled = true;
             move3.Enabled = true;
@@ -353,6 +359,15 @@ namespace csharp2020
 
         private void move2_Click(object sender, EventArgs e)
         {
+        }
+
+        private void quitGame_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void move2_Click_1(object sender, EventArgs e)
+        {
             if (player1Turn == true)
             {
                 if (offensive == true)
@@ -361,18 +376,65 @@ namespace csharp2020
                     if (playerAccuracy > 8)
                     {
                         missLbl.Text = "Player 1, You Missed!";
+                        player1Turn = false;
                         enemyAttackTime();
                     }
                     if (playerAccuracy < 9)
                     {
-                        playerAttack = bigAttack.Next(4, 7);
-                        enemyHitpoints -= playerAttack;
-                        missLbl.Text = "You hit the enemy for" + "" + playerAttack + "" + "damage!";
+                        playerAttack = bigAttack.Next(3, 7);
+                        enemyHitpoints -= playerAttack + strengthBuff;
+                        missLbl.Text = "You hit the enemy for" + "" + playerAttack + strengthBuff + "" + "damage!";
                         enemyHpLbl.Text = enemyHitpoints.ToString();
+                        player1Turn = false;
                         enemyAttackTime();
                     }
                 }
             }
+        }
+
+        private void move3_Click(object sender, EventArgs e)
+        {
+            if (player1Turn == true)
+            {
+                if (offensive == true)
+                {
+                    strengthBuff += 1;
+                    missLbl.Text = "Buffed Player 1's Strength!";
+                    player1Turn = false;
+                    enemyAttackTime();
+                }
+            }
+        }
+
+        private void move4_Click(object sender, EventArgs e)
+        {
+            if (player1Turn == true)
+            {
+                if (offensive == true)
+                {
+                    playerAccuracy = playerAcc.Next(1, 10);
+                    if (playerAccuracy > 3)
+                    {
+                        missLbl.Text = "Player 1, You Missed!";
+                        player1Turn = false;
+                        enemyAttackTime();
+                    }
+                    if (playerAccuracy < 4)
+                    {
+                        playerAttack = bigAttack.Next(8, 13);
+                        enemyHitpoints -= playerAttack + strengthBuff;
+                        missLbl.Text = "You hit the enemy for" + "" + playerAttack + strengthBuff + "" + "damage!";
+                        enemyHpLbl.Text = enemyHitpoints.ToString();
+                        player1Turn = false;
+                        enemyAttackTime();
+                    }
+                }
+            }
+        }
+
+        private void move5_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 
