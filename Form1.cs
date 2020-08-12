@@ -36,7 +36,14 @@ namespace csharp2020
         bool hard = false;
         bool player1Turn;
         bool player2Turn;
+
+        string move;
         string name;
+
+        bool left;
+        bool right;
+        bool up;
+        bool down;
 
         int playerAttack;
         int playerDefense;
@@ -45,9 +52,13 @@ namespace csharp2020
         int enemyAttack;
         int enemyDefense;
         int enemyAccuracy;
+        int enemyHeal;
         int enemyHitpoints;
         int strengthBuff = 0;
         int wound = 3;
+
+        int lives;
+        int score;
 
         Random playerAcc = new Random();
         Random bigAttack = new Random();
@@ -98,16 +109,27 @@ namespace csharp2020
             moveInfo.Visible = false;
             enemyMissLbl.Visible = false;
             missLbl.Visible = false;
+            instructLbl.Visible = false;
+
+            PnlGame.Visible = false;
         }
 
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyData == Keys.Left) { left = true; }
+            if (e.KeyData == Keys.Right) { right = true; }
+            if (e.KeyData == Keys.Up) { up = true; }
+            if (e.KeyData == Keys.Down) { down = true; }
 
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
+            if (e.KeyData == Keys.Left) { left = false; }
+            if (e.KeyData == Keys.Right) { right = false; }
+            if (e.KeyData == Keys.Up) { up = false; }
+            if (e.KeyData == Keys.Down) { down = false; }
         }
 
         public void stopGame()
@@ -125,6 +147,7 @@ namespace csharp2020
         {
             MessageBox.Show("In this game, you engage in a 1v1 versus the AI in a duel! Click the buttons to perform moves to kill the planet before it kills you! (Health down to 0)");
             MessageBox.Show("When you click Start, select a class and jump in! Click the moves to perform them on the planet, or click the Move Info button if you are not sure.");
+            MessageBox.Show("If you want to earn a reward boost for Easy difficulty, play the bonus game - dodge the planets until you get to 100 points!");
         }
 
   
@@ -139,6 +162,7 @@ namespace csharp2020
             TxtName.Visible = false;
             lblName.Visible = false;
             settingsButton.Visible = false;
+            instructLbl.Visible = false;
 
             lblDifficulty.Visible = false;
             easyFButton.Visible = false;
@@ -167,6 +191,7 @@ namespace csharp2020
         { 
             startButton.Visible = false;
             instructButton.Visible = false;
+            instructLbl.Visible = true;
             TxtName.Visible = false;
             lblName.Visible = false;
             settingsButton.Visible = false;
@@ -265,6 +290,7 @@ namespace csharp2020
         }
         void startGame()
         {
+            strengthBuff = 0;
             userHpLbl.Text = playerHitpoints.ToString();
             enemyHpLbl.Text = enemyHitpoints.ToString();
             controlBtn.Visible = false;
@@ -273,6 +299,7 @@ namespace csharp2020
             defButton.Visible = false;
             conBtn.Visible = false;
             classLbl.Visible = false;
+            bonusGame.Visible = false;
 
             alien.Visible = true;
             planetAi.Visible = true;
@@ -309,7 +336,7 @@ namespace csharp2020
                     {
                         playerAttack = bigAttack.Next(6, 8);
                         enemyHitpoints -= playerAttack + strengthBuff;
-                        missLbl.Text = "You hit the enemy for" + "" + playerAttack + strengthBuff + "" + "damage!";
+                        missLbl.Text = "You hit the enemy for" + "" + (playerAttack + strengthBuff) + "" + "damage!";
                         enemyHpLbl.Text = enemyHitpoints.ToString();
                         player1Turn = false;
                         enemyAttackTime();
@@ -328,9 +355,9 @@ namespace csharp2020
 
             Thread.Sleep(2000);
 
-            enemyAccuracy = enemyMoveRand.Next(1, 10);
+            enemyAccuracy = enemyMoveRand.Next(1, 12);
 
-            if (enemyAccuracy > 8)
+            if (enemyAccuracy > 10)
             {
                 enemyMissLbl.Text = "The enemy missed!";
                 player1Turn = true;
@@ -342,6 +369,15 @@ namespace csharp2020
                 playerHitpoints -= enemyAttack;
                 enemyMissLbl.Text = "You were hit by the enemy for" + "" + enemyAttack + "" + "damage!";
                 userHpLbl.Text = playerHitpoints.ToString();
+                player1Turn = true;
+                playerAttackTime();
+            }
+            if (enemyAccuracy > 8 && enemyAccuracy < 11)
+            {
+                enemyHeal = enemyMoveRand.Next(5, 7);
+                enemyHitpoints += enemyHeal;
+                enemyMissLbl.Text = "The enemy healed for" + "" + enemyHeal + "" + "damage!";
+                enemyhealthLbl.Text = enemyHitpoints.ToString();
                 player1Turn = true;
                 playerAttackTime();
             }
@@ -435,6 +471,95 @@ namespace csharp2020
         private void move5_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void bonusGame_Click(object sender, EventArgs e)
+        {
+            startButton.Visible = false;
+            instructButton.Visible = false;
+            instructLbl.Visible = true;
+            TxtName.Visible = false;
+            lblName.Visible = false;
+            settingsButton.Visible = false;
+            instructLbl.Visible = false;
+            bossyLbl.Visible = false;
+            quitGame.Visible = false;
+
+            TmrPlanet.Enabled = false;
+            TmrShip.Enabled = false;
+            PnlGame.Visible = true;
+
+            MessageBox.Show("Get to 100 to unlock rewards!");
+
+
+        }
+
+        private void PnlGame_Paint(object sender, PaintEventArgs e)
+        {
+            //get the graphics used to paint on the panel control
+            g = e.Graphics;
+            //call the Planet class's DrawPlanet method to draw the image planet1 
+            for (int i = 0; i < 8; i++)
+            {
+                int rndmspeed = yspeed.Next(5, 20);
+                planet[i].y += rndmspeed;
+                //call the Planet class's drawPlanet method to draw the images
+                planet[i].DrawPlanet(g);
+            }
+            spaceship.DrawSpaceship(g);
+
+        }
+
+        private void TmrPlanet_Tick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                planet[i].MovePlanet();
+                if (spaceship.spaceRec.IntersectsWith(planet[i].planetRec))
+                {
+                    //reset planet[i] back to top of panel
+                    planet[i].y = 30; // set  y value of planetRec
+                    lives -= 1;// lose a life
+                  //lblLives.Text = lives.ToString();// display number of lives
+                    CheckLives();
+                }
+                if (planet[i].y >= PnlGame.Height)
+                {
+                    score += 1;//update the score
+                //  lblScore.Text = score.ToString();// display score
+                    planet[i].y = 30;
+                }
+            }
+            PnlGame.Invalidate();
+        }
+
+        public void CheckLives()
+        {
+
+        }
+
+        private void TmrShip_Tick(object sender, EventArgs e)
+        {
+            if (right) // if right arrow key pressed
+            {
+                move = "right";
+                spaceship.MoveSpaceship(move);
+            }
+            if (left) // if left arrow key pressed
+            {
+                move = "left";
+                spaceship.MoveSpaceship(move);
+            }
+            if (up) // if right arrow key pressed
+            {
+                move = "up";
+                spaceship.MoveSpaceship(move);
+            }
+            if (down) // if left arrow key pressed
+            {
+                move = "down";
+                spaceship.MoveSpaceship(move);
+            }
         }
     }
 
