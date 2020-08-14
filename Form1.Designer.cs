@@ -66,8 +66,6 @@
             this.missLbl = new System.Windows.Forms.Label();
             this.enemyMissLbl = new System.Windows.Forms.Label();
             this.quitGame = new System.Windows.Forms.Button();
-            this.bonusGame = new System.Windows.Forms.Button();
-            this.PnlGame = new System.Windows.Forms.Panel();
             this.TmrShip = new System.Windows.Forms.Timer(this.components);
             this.TmrPlanet = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.alien)).BeginInit();
@@ -190,7 +188,7 @@
             // 
             this.instructButton.BackColor = System.Drawing.Color.Lime;
             this.instructButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.instructButton.Location = new System.Drawing.Point(210, 160);
+            this.instructButton.Location = new System.Drawing.Point(210, 212);
             this.instructButton.Name = "instructButton";
             this.instructButton.Size = new System.Drawing.Size(267, 92);
             this.instructButton.TabIndex = 8;
@@ -211,7 +209,7 @@
             this.settingsButton.BackColor = System.Drawing.Color.Red;
             this.settingsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.settingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.settingsButton.Location = new System.Drawing.Point(210, 62);
+            this.settingsButton.Location = new System.Drawing.Point(210, 94);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(267, 92);
             this.settingsButton.TabIndex = 9;
@@ -249,6 +247,7 @@
             this.defButton.TabIndex = 21;
             this.defButton.Text = "Defensive";
             this.defButton.UseVisualStyleBackColor = true;
+            this.defButton.Click += new System.EventHandler(this.defButton_Click);
             // 
             // sneakyBtn
             // 
@@ -463,44 +462,19 @@
             this.quitGame.UseVisualStyleBackColor = false;
             this.quitGame.Click += new System.EventHandler(this.quitGame_Click);
             // 
-            // bonusGame
-            // 
-            this.bonusGame.BackColor = System.Drawing.Color.Magenta;
-            this.bonusGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.bonusGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bonusGame.Location = new System.Drawing.Point(210, 258);
-            this.bonusGame.Name = "bonusGame";
-            this.bonusGame.Size = new System.Drawing.Size(267, 92);
-            this.bonusGame.TabIndex = 42;
-            this.bonusGame.Text = "Bonus Game!";
-            this.bonusGame.UseVisualStyleBackColor = false;
-            this.bonusGame.Click += new System.EventHandler(this.bonusGame_Click);
-            // 
-            // PnlGame
-            // 
-            this.PnlGame.Location = new System.Drawing.Point(-1, 4);
-            this.PnlGame.Name = "PnlGame";
-            this.PnlGame.Size = new System.Drawing.Size(612, 438);
-            this.PnlGame.TabIndex = 43;
-            this.PnlGame.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlGame_Paint);
-            // 
             // TmrShip
             // 
             this.TmrShip.Enabled = true;
-            this.TmrShip.Tick += new System.EventHandler(this.TmrShip_Tick);
             // 
             // TmrPlanet
             // 
             this.TmrPlanet.Enabled = true;
-            this.TmrPlanet.Tick += new System.EventHandler(this.TmrPlanet_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 489);
-            this.Controls.Add(this.PnlGame);
-            this.Controls.Add(this.bonusGame);
             this.Controls.Add(this.quitGame);
             this.Controls.Add(this.enemyMissLbl);
             this.Controls.Add(this.missLbl);
@@ -538,8 +512,6 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.alien)).EndInit();
@@ -589,8 +561,6 @@
         private System.Windows.Forms.Label missLbl;
         private System.Windows.Forms.Label enemyMissLbl;
         private System.Windows.Forms.Button quitGame;
-        private System.Windows.Forms.Button bonusGame;
-        private System.Windows.Forms.Panel PnlGame;
         private System.Windows.Forms.Timer TmrShip;
         private System.Windows.Forms.Timer TmrPlanet;
     }
