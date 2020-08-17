@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -324,6 +325,7 @@ namespace csharp2020
                         missLbl.Text = "Player 1, You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
+                        deathCheck();
                     }
                     if (playerAccuracy < 7)
                     {
@@ -333,6 +335,7 @@ namespace csharp2020
                         enemyHpLbl.Text = enemyHitpoints.ToString();
                         player1Turn = false;
                         enemyAttackTime();
+                        deathCheck();
                     }
                 }
                 if (defensive == true)
@@ -343,6 +346,7 @@ namespace csharp2020
                         missLbl.Text = "Player 1, You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
+                        deathCheck();
                     }
                     if (playerAccuracy < 9)
                     {
@@ -352,6 +356,7 @@ namespace csharp2020
                         enemyHpLbl.Text = enemyHitpoints.ToString();
                         player1Turn = false;
                         enemyAttackTime();
+                        deathCheck();
                     }
                 }
             }
@@ -374,6 +379,7 @@ namespace csharp2020
                 enemyMissLbl.Text = "The enemy missed!";
                 player1Turn = true;
                 playerAttackTime();
+                deathCheck();
             }
             if (enemyAccuracy < 9)
             {
@@ -383,15 +389,25 @@ namespace csharp2020
                 userHpLbl.Text = playerHitpoints.ToString();
                 player1Turn = true;
                 playerAttackTime();
+                deathCheck();
             }
-            if (enemyAccuracy > 8 && enemyAccuracy < 11)
+            if (enemyAccuracy > 8 && enemyAccuracy < 11 && enemyHitpoints < 51)
             {
                 enemyHeal = enemyMoveRand.Next(5, 7);
                 enemyHitpoints += enemyHeal;
-                enemyMissLbl.Text = "The enemy healed for" + "" + enemyHeal + "" + "damage!";
+                if (enemyHitpoints > 50)
+                {
+                    enemyHitpoints = 50;
+                    enemyMissLbl.Text = "The enemy healed to full health!";
+                }
+                else
+                {
+                    enemyMissLbl.Text = "The enemy healed for" + "" + enemyHeal + "" + "damage!";
+                }
                 enemyHpLbl.Text = enemyHitpoints.ToString();
                 player1Turn = true;
                 playerAttackTime();
+                deathCheck();
             }
         }
 
@@ -426,6 +442,7 @@ namespace csharp2020
                         missLbl.Text = "Player 1, You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
+                        deathCheck();
                     }
                     if (playerAccuracy < 9)
                     {
@@ -435,6 +452,7 @@ namespace csharp2020
                         enemyHpLbl.Text = enemyHitpoints.ToString();
                         player1Turn = false;
                         enemyAttackTime();
+                        deathCheck();
                     }
                 }
                 if (defensive == true && playerHitpoints < 81)
@@ -445,6 +463,7 @@ namespace csharp2020
                     userHpLbl.Text = playerHitpoints.ToString();
                     player1Turn = false;
                     enemyAttackTime();
+                    deathCheck();
                 }
             }
         }
@@ -459,7 +478,9 @@ namespace csharp2020
                     missLbl.Text = "Buffed Player 1's Strength!";
                     player1Turn = false;
                     enemyAttackTime();
+                    deathCheck();
                 }
+
             }
         }
 
@@ -475,6 +496,7 @@ namespace csharp2020
                         missLbl.Text = "Player 1, You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
+                        deathCheck();
                     }
                     if (playerAccuracy < 4)
                     {
@@ -484,6 +506,7 @@ namespace csharp2020
                         enemyHpLbl.Text = enemyHitpoints.ToString();
                         player1Turn = false;
                         enemyAttackTime();
+                        deathCheck();
                     }
                 }
             }
@@ -502,6 +525,56 @@ namespace csharp2020
             control = false;
             MessageBox.Show("Defensive Class. Very survival focused.");
             conBtn.Visible = true;
+        }
+        public void deathCheck()
+        {
+            if (enemyHitpoints == 0 || enemyHitpoints < 0)
+            {
+                player1Turn = false;
+                move1.Enabled = false;
+                move2.Enabled = false;
+                move3.Enabled = false;
+                move4.Enabled = false;
+                move5.Enabled = false;
+                MessageBox.Show("Congratulations! You killed the planet! Try a harder difficulty!");
+                resetGame();
+            }
+            if (playerHitpoints == 0 || playerHitpoints < 0)
+            {
+                player1Turn = false;
+                move1.Enabled = false;
+                move2.Enabled = false;
+                move3.Enabled = false;
+                move4.Enabled = false;
+                move5.Enabled = false;
+                MessageBox.Show("You Died! Better luck next time!");
+                resetGame();
+            }
+        }
+        public void resetGame()
+        {
+            lblDifficulty.Visible = true;
+            easyFButton.Visible = true;
+            mediumFButton.Visible = true;
+            hardFButton.Visible = true;
+            easyFButton.Enabled = true;
+            mediumFButton.Enabled = true;
+            hardFButton.Enabled = true;
+
+            planetAi.Visible = false;
+            alien.Visible = false;
+            userhealthLbl.Visible = false;
+            userHpLbl.Visible = false;
+            enemyhealthLbl.Visible = false;
+            enemyHpLbl.Visible = false;
+            move1.Visible = false;
+            move2.Visible = false;
+            move3.Visible = false;
+            move4.Visible = false;
+            move5.Visible = false;
+            moveInfo.Visible = false;
+            enemyMissLbl.Visible = false;
+            missLbl.Visible = false;
         }
     }
 }
