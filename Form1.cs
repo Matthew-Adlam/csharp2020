@@ -112,7 +112,7 @@ namespace csharp2020
             enemyMissLbl.Visible = false;
             missLbl.Visible = false;
             instructLbl.Visible = false;
-
+            waitLbl.Visible = false;
         }
 
 
@@ -140,6 +140,9 @@ namespace csharp2020
         {
             fighterMode = true;
             easy = true;
+            medium = false;
+            hard = false;
+            enemyHitpoints = 50;
             MessageBox.Show("Selected Easy.");
             startButton.Visible = false;
             instructButton.Visible = false;
@@ -163,12 +166,54 @@ namespace csharp2020
 
         private void normalFButton_Click(object sender, EventArgs e)
         {
+            fighterMode = true;
+            easy = false;
+            medium = true;
+            hard = false;
+            MessageBox.Show("Selected Medium.");
+            startButton.Visible = false;
+            instructButton.Visible = false;
+            TxtName.Visible = false;
+            lblName.Visible = false;
+            settingsButton.Visible = false;
+            instructLbl.Visible = false;
 
+            lblDifficulty.Visible = false;
+            easyFButton.Visible = false;
+            mediumFButton.Visible = false;
+            hardFButton.Visible = false;
+
+            controlBtn.Visible = true;
+            offBtn.Visible = true;
+            defButton.Visible = true;
+            sneakyBtn.Visible = true;
+            classLbl.Visible = true;
         }
 
         private void hardFButton_Click(object sender, EventArgs e)
         {
+            fighterMode = true;
+            easy = false;
+            medium = false;
+            hard = true;
+            MessageBox.Show("Selected Hard.");
+            startButton.Visible = false;
+            instructButton.Visible = false;
+            TxtName.Visible = false;
+            lblName.Visible = false;
+            settingsButton.Visible = false;
+            instructLbl.Visible = false;
 
+            lblDifficulty.Visible = false;
+            easyFButton.Visible = false;
+            mediumFButton.Visible = false;
+            hardFButton.Visible = false;
+
+            controlBtn.Visible = true;
+            offBtn.Visible = true;
+            defButton.Visible = true;
+            sneakyBtn.Visible = true;
+            classLbl.Visible = true;
         }
 
         private void settingsButton_Click(object sender, EventArgs e)
@@ -285,6 +330,19 @@ namespace csharp2020
         }
         void startGame()
         {
+            if (easy == true)
+            {
+                enemyHitpoints = 50;
+            }
+            if (medium == true)
+            {
+                enemyHitpoints = 65;
+            }
+            if (hard == true)
+            {
+                enemyHitpoints = 80;
+            }
+            move5.Text = "Run Away!";
             strengthBuff = 0;
             userHpLbl.Text = playerHitpoints.ToString();
             enemyHpLbl.Text = enemyHitpoints.ToString();
@@ -364,6 +422,7 @@ namespace csharp2020
         }
         void enemyAttackTime()
         {
+            waitLbl.Visible = true;
             move1.Enabled = false;
             move2.Enabled = false;
             move3.Enabled = false;
@@ -371,48 +430,125 @@ namespace csharp2020
             move5.Enabled = false;
 
             Thread.Sleep(2000);
+            if (easy == true)
+            {
+                enemyAccuracy = enemyMoveRand.Next(1, 12);
 
-            enemyAccuracy = enemyMoveRand.Next(1, 12);
+                if (enemyAccuracy > 10)
+                {
+                    enemyMissLbl.Text = "The enemy missed!";
+                    player1Turn = true;
+                    playerAttackTime();
+                    deathCheck();
+                }
+                if (enemyAccuracy < 9)
+                {
+                    enemyAttack = enemyMoveRand.Next(3, 8);
+                    playerHitpoints -= enemyAttack;
+                    enemyMissLbl.Text = "You were hit by the enemy for" + "" + enemyAttack + "" + "damage!";
+                    userHpLbl.Text = playerHitpoints.ToString();
+                    player1Turn = true;
+                    playerAttackTime();
+                    deathCheck();
+                }
+                if (enemyAccuracy > 8 && enemyAccuracy < 11 && enemyHitpoints < 51)
+                {
+                    enemyHeal = enemyMoveRand.Next(5, 7);
+                    enemyHitpoints += enemyHeal;
+                    if (enemyHitpoints > 50)
+                    {
+                        enemyHitpoints = 50;
+                        enemyMissLbl.Text = "The enemy healed to full health!";
+                    }
+                    else
+                    {
+                        enemyMissLbl.Text = "The enemy healed for" + "" + enemyHeal + "" + "damage!";
+                    }
+                    enemyHpLbl.Text = enemyHitpoints.ToString();
+                    player1Turn = true;
+                    playerAttackTime();
+                    deathCheck();
+                }
+            }
+            if (medium == true )
+            {
+                enemyAccuracy = enemyMoveRand.Next(1, 12);
 
-            if (enemyAccuracy > 10)
-            {
-                enemyMissLbl.Text = "The enemy missed!";
-                player1Turn = true;
-                playerAttackTime();
-                deathCheck();
-            }
-            if (enemyAccuracy < 9)
-            {
-                enemyAttack = enemyMoveRand.Next(3, 8);
-                playerHitpoints -= enemyAttack;
-                enemyMissLbl.Text = "You were hit by the enemy for" + "" + enemyAttack + "" + "damage!";
-                userHpLbl.Text = playerHitpoints.ToString();
-                player1Turn = true;
-                playerAttackTime();
-                deathCheck();
-            }
-            if (enemyAccuracy > 8 && enemyAccuracy < 11 && enemyHitpoints < 51)
-            {
-                enemyHeal = enemyMoveRand.Next(5, 7);
-                enemyHitpoints += enemyHeal;
-                if (enemyHitpoints > 50)
+                if (enemyAccuracy > 10)
                 {
-                    enemyHitpoints = 50;
-                    enemyMissLbl.Text = "The enemy healed to full health!";
+                    enemyMissLbl.Text = "The enemy missed!";
+                    player1Turn = true;
+                    playerAttackTime();
+                    deathCheck();
                 }
-                else
+                if (enemyAccuracy < 9)
                 {
-                    enemyMissLbl.Text = "The enemy healed for" + "" + enemyHeal + "" + "damage!";
+                    enemyAttack = enemyMoveRand.Next(4, 9);
+                    playerHitpoints -= enemyAttack;
+                    enemyMissLbl.Text = "You were hit by the enemy for" + "" + enemyAttack + "" + "damage!";
+                    userHpLbl.Text = playerHitpoints.ToString();
+                    player1Turn = true;
+                    playerAttackTime();
+                    deathCheck();
                 }
-                enemyHpLbl.Text = enemyHitpoints.ToString();
-                player1Turn = true;
-                playerAttackTime();
-                deathCheck();
+                if (enemyAccuracy > 8 && enemyAccuracy < 11 && enemyHitpoints < 66)
+                {
+                    enemyHeal = enemyMoveRand.Next(6, 8);
+                    enemyHitpoints += enemyHeal;
+                    if (enemyHitpoints > 65)
+                    {
+                        enemyHitpoints = 65;
+                        enemyMissLbl.Text = "The enemy healed to full health!";
+                    }
+                    else
+                    {
+                        enemyMissLbl.Text = "The enemy healed for" + "" + enemyHeal + "" + "damage!";
+                    }
+                    enemyHpLbl.Text = enemyHitpoints.ToString();
+                    player1Turn = true;
+                    playerAttackTime();
+                    deathCheck();
+                }             
+            }
+            if (hard == true)
+            {
+                enemyAccuracy = enemyMoveRand.Next(1, 12);
+
+                if (enemyAccuracy < 9)
+                {
+                    enemyAttack = enemyMoveRand.Next(6, 9);
+                    playerHitpoints -= enemyAttack;
+                    enemyMissLbl.Text = "You were hit by the enemy for" + "" + enemyAttack + "" + "damage!";
+                    userHpLbl.Text = playerHitpoints.ToString();
+                    player1Turn = true;
+                    playerAttackTime();
+                    deathCheck();
+                }
+                if (enemyAccuracy > 10 && enemyAccuracy < 13 && enemyHitpoints < 81)
+                {
+                    enemyHeal = enemyMoveRand.Next(7, 9);
+                    enemyHitpoints += enemyHeal;
+                    if (enemyHitpoints > 65)
+                    {
+                        enemyHitpoints = 65;
+                        enemyMissLbl.Text = "The enemy healed to full health!";
+                    }
+                    else
+                    {
+                        enemyMissLbl.Text = "The enemy healed for" + "" + enemyHeal + "" + "damage!";
+                    }
+                    enemyHpLbl.Text = enemyHitpoints.ToString();
+                    player1Turn = true;
+                    playerAttackTime();
+                    deathCheck();
+                }
             }
         }
 
         void playerAttackTime()
         {
+            waitLbl.Visible = false;
+            Thread.Sleep(500);
             player1Turn = true;
             move1.Enabled = true;
             move2.Enabled = true;
@@ -514,7 +650,8 @@ namespace csharp2020
 
         private void move5_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("You ran from the planet!");
+            resetGame();
         }
 
         private void defButton_Click(object sender, EventArgs e)
@@ -575,6 +712,26 @@ namespace csharp2020
             moveInfo.Visible = false;
             enemyMissLbl.Visible = false;
             missLbl.Visible = false;
+        }
+
+        private void moveInfo_Click(object sender, EventArgs e)
+        {
+            if(offensive == true)
+            {
+                MessageBox.Show("Big Attack - big damage and decent accuracy, Decent Attack - decent damage and high accuracy, Strength Buff - makes you deal more damage, HUGE attack - massive damage but low accuracy");
+            }
+            if(defensive == true)
+            {
+                //
+            }
+            if (control == true)
+            {
+                //
+            }
+            if(sneaky == true)
+            {
+                //
+            }
         }
     }
 }

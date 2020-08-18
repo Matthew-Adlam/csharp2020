@@ -68,6 +68,7 @@
             this.quitGame = new System.Windows.Forms.Button();
             this.TmrShip = new System.Windows.Forms.Timer(this.components);
             this.TmrPlanet = new System.Windows.Forms.Timer(this.components);
+            this.waitLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.alien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.planetAi)).BeginInit();
             this.SuspendLayout();
@@ -188,7 +189,7 @@
             // 
             this.instructButton.BackColor = System.Drawing.Color.Lime;
             this.instructButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.instructButton.Location = new System.Drawing.Point(210, 212);
+            this.instructButton.Location = new System.Drawing.Point(210, 230);
             this.instructButton.Name = "instructButton";
             this.instructButton.Size = new System.Drawing.Size(267, 92);
             this.instructButton.TabIndex = 8;
@@ -364,97 +365,102 @@
             // 
             // move1
             // 
+            this.move1.BackColor = System.Drawing.Color.Red;
             this.move1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.move1.Location = new System.Drawing.Point(48, 317);
             this.move1.Name = "move1";
             this.move1.Size = new System.Drawing.Size(166, 50);
             this.move1.TabIndex = 32;
             this.move1.Text = "Big Attack";
-            this.move1.UseVisualStyleBackColor = true;
+            this.move1.UseVisualStyleBackColor = false;
             this.move1.Click += new System.EventHandler(this.move1_Click);
             // 
             // move2
             // 
+            this.move2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.move2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.move2.Location = new System.Drawing.Point(256, 317);
             this.move2.Name = "move2";
             this.move2.Size = new System.Drawing.Size(166, 50);
             this.move2.TabIndex = 33;
             this.move2.Text = "Decent Attack";
-            this.move2.UseVisualStyleBackColor = true;
+            this.move2.UseVisualStyleBackColor = false;
             this.move2.Click += new System.EventHandler(this.move2_Click_1);
             // 
             // move3
             // 
+            this.move3.BackColor = System.Drawing.Color.Yellow;
             this.move3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.move3.Location = new System.Drawing.Point(462, 317);
             this.move3.Name = "move3";
             this.move3.Size = new System.Drawing.Size(166, 50);
             this.move3.TabIndex = 34;
             this.move3.Text = "Strength Buff";
-            this.move3.UseVisualStyleBackColor = true;
+            this.move3.UseVisualStyleBackColor = false;
             this.move3.Click += new System.EventHandler(this.move3_Click);
             // 
             // move4
             // 
+            this.move4.BackColor = System.Drawing.Color.Lime;
             this.move4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.move4.Location = new System.Drawing.Point(48, 389);
             this.move4.Name = "move4";
             this.move4.Size = new System.Drawing.Size(166, 53);
             this.move4.TabIndex = 36;
             this.move4.Text = "HUGE Attack";
-            this.move4.UseVisualStyleBackColor = true;
+            this.move4.UseVisualStyleBackColor = false;
             this.move4.Click += new System.EventHandler(this.move4_Click);
             // 
             // move5
             // 
+            this.move5.BackColor = System.Drawing.Color.DodgerBlue;
             this.move5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.move5.Location = new System.Drawing.Point(256, 389);
             this.move5.Name = "move5";
             this.move5.Size = new System.Drawing.Size(166, 53);
             this.move5.TabIndex = 37;
-            this.move5.Text = "Coming Soon!";
-            this.move5.UseVisualStyleBackColor = true;
+            this.move5.Text = "Run away!";
+            this.move5.UseVisualStyleBackColor = false;
             this.move5.Click += new System.EventHandler(this.move5_Click);
             // 
             // moveInfo
             // 
+            this.moveInfo.BackColor = System.Drawing.Color.Fuchsia;
             this.moveInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.moveInfo.Location = new System.Drawing.Point(462, 389);
             this.moveInfo.Name = "moveInfo";
             this.moveInfo.Size = new System.Drawing.Size(166, 53);
             this.moveInfo.TabIndex = 38;
             this.moveInfo.Text = "Move Info";
-            this.moveInfo.UseVisualStyleBackColor = true;
+            this.moveInfo.UseVisualStyleBackColor = false;
+            this.moveInfo.Click += new System.EventHandler(this.moveInfo_Click);
             // 
             // missLbl
             // 
             this.missLbl.AutoSize = true;
             this.missLbl.BackColor = System.Drawing.Color.Transparent;
             this.missLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.missLbl.Location = new System.Drawing.Point(12, 453);
+            this.missLbl.Location = new System.Drawing.Point(12, 460);
             this.missLbl.Name = "missLbl";
-            this.missLbl.Size = new System.Drawing.Size(41, 20);
+            this.missLbl.Size = new System.Drawing.Size(0, 20);
             this.missLbl.TabIndex = 39;
-            this.missLbl.Text = "miss";
             // 
             // enemyMissLbl
             // 
             this.enemyMissLbl.AutoSize = true;
             this.enemyMissLbl.BackColor = System.Drawing.Color.Transparent;
             this.enemyMissLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.enemyMissLbl.Location = new System.Drawing.Point(339, 460);
+            this.enemyMissLbl.Location = new System.Drawing.Point(361, 460);
             this.enemyMissLbl.Name = "enemyMissLbl";
-            this.enemyMissLbl.Size = new System.Drawing.Size(41, 20);
+            this.enemyMissLbl.Size = new System.Drawing.Size(0, 20);
             this.enemyMissLbl.TabIndex = 40;
-            this.enemyMissLbl.Text = "miss";
             // 
             // quitGame
             // 
             this.quitGame.BackColor = System.Drawing.Color.Blue;
             this.quitGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.quitGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quitGame.Location = new System.Drawing.Point(210, 360);
+            this.quitGame.Location = new System.Drawing.Point(210, 344);
             this.quitGame.Name = "quitGame";
             this.quitGame.Size = new System.Drawing.Size(267, 92);
             this.quitGame.TabIndex = 41;
@@ -470,11 +476,22 @@
             // 
             this.TmrPlanet.Enabled = true;
             // 
+            // waitLbl
+            // 
+            this.waitLbl.AutoSize = true;
+            this.waitLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.waitLbl.Location = new System.Drawing.Point(182, 279);
+            this.waitLbl.Name = "waitLbl";
+            this.waitLbl.Size = new System.Drawing.Size(304, 24);
+            this.waitLbl.TabIndex = 42;
+            this.waitLbl.Text = "Please wait, the enemy is deciding!";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 489);
+            this.Controls.Add(this.waitLbl);
             this.Controls.Add(this.quitGame);
             this.Controls.Add(this.enemyMissLbl);
             this.Controls.Add(this.missLbl);
@@ -563,6 +580,7 @@
         private System.Windows.Forms.Button quitGame;
         private System.Windows.Forms.Timer TmrShip;
         private System.Windows.Forms.Timer TmrPlanet;
+        private System.Windows.Forms.Label waitLbl;
     }
 }
 
