@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace csharp2020
 {
-    class BossBattle
+    class aiAttack
     {
-        public void bossBattleStart (bool bossBattle)
-        {
-
-        }
     }
 }

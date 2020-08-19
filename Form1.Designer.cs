@@ -227,6 +227,7 @@
             this.controlBtn.TabIndex = 19;
             this.controlBtn.Text = "Control";
             this.controlBtn.UseVisualStyleBackColor = true;
+            this.controlBtn.Click += new System.EventHandler(this.controlBtn_Click);
             // 
             // offBtn
             // 
@@ -259,6 +260,7 @@
             this.sneakyBtn.TabIndex = 22;
             this.sneakyBtn.Text = "Sneaky";
             this.sneakyBtn.UseVisualStyleBackColor = true;
+            this.sneakyBtn.Click += new System.EventHandler(this.sneakyBtn_Click);
             // 
             // classLbl
             // 
@@ -460,7 +462,7 @@
             this.quitGame.BackColor = System.Drawing.Color.Blue;
             this.quitGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.quitGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quitGame.Location = new System.Drawing.Point(210, 344);
+            this.quitGame.Location = new System.Drawing.Point(210, 350);
             this.quitGame.Name = "quitGame";
             this.quitGame.Size = new System.Drawing.Size(267, 92);
             this.quitGame.TabIndex = 41;
