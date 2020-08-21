@@ -397,7 +397,7 @@
             this.move3.Name = "move3";
             this.move3.Size = new System.Drawing.Size(166, 50);
             this.move3.TabIndex = 34;
-            this.move3.Text = "Strength Buff";
+            this.move3.Text = "Strength Buff (Max 2)";
             this.move3.UseVisualStyleBackColor = false;
             this.move3.Click += new System.EventHandler(this.move3_Click);
             // 

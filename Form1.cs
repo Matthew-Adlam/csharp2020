@@ -49,6 +49,7 @@ namespace csharp2020
         public int playerAttack;
         public int playerDefense = 0;
         public int playerAccuracy;
+        public int accuracyBuff = 0;
         public int playerHitpoints;
         public int playerHeal;
         public int enemyAttack;
@@ -319,11 +320,11 @@ namespace csharp2020
             if (defensive == true)
             {
                 MessageBox.Show("Selected Defensive Class.");
-                playerHitpoints = 80;
+                playerHitpoints = 75;
                 enemyHitpoints = 50; // ^^^ and this subject to change due to difficulty
                 move1.Text = "Average Attack";
                 move2.Text = "Heal";
-                move3.Text = "Defensive Boost";
+                move3.Text = "Defensive Boost (Max 2)";
                 move4.Text = "Swipe";
                 move5.Text = "Run Away!";
                 startGame();              
@@ -334,9 +335,21 @@ namespace csharp2020
                 playerHitpoints = 30;
                 enemyHitpoints = 50; // ^^^ and this subject to change due to difficulty
                 move1.Text = "Pounce";
-                move2.Text = "";
-                move3.Text = "Defensive Boost";
-                move4.Text = "Swipe";
+                move2.Text = "Sharpen (Max 2)";
+                move3.Text = "Accuracy Boost (Max 2)";
+                move4.Text = "Weak Heal";
+                move5.Text = "Run Away!";
+                startGame();
+            }
+            if (control == true)
+            {
+                MessageBox.Show("Selected Sneaky Class.");
+                playerHitpoints = 60;
+                enemyHitpoints = 50; // ^^^ and this subject to change due to difficulty
+                move1.Text = "Decent Attack";
+                move2.Text = "Defensive Boost (Max 2)";
+                move3.Text = "Accuracy Boost (Max 2)";
+                move4.Text = "Strength Boost (Max 2)";
                 move5.Text = "Run Away!";
                 startGame();
             }
@@ -426,6 +439,52 @@ namespace csharp2020
                         playerAttack = bigAttack.Next(2, 5);
                         enemyHitpoints -= playerAttack ;
                         missLbl.Text = "You hit the enemy for" + "" + playerAttack  + "" + "damage!";
+                        enemyHpLbl.Text = enemyHitpoints.ToString();
+                        player1Turn = false;
+                        enemyAttackTime();
+                        deathCheck();
+                    }
+                }
+                if (sneaky == true)
+                {
+                    playerAccuracy = playerAcc.Next(1, 10);
+                    if (playerAccuracy < 11)
+                    {
+                        playerAccuracy += accuracyBuff;
+                    }
+                    if (playerAccuracy > 8)
+                    {
+                        missLbl.Text = "Player 1, You Missed!";
+                        player1Turn = false;
+                        enemyAttackTime();
+                        deathCheck();
+                    }
+                    if (playerAccuracy < 9)
+                    {
+                        playerAttack = 7;
+                        enemyHitpoints -= playerAttack;
+                        missLbl.Text = "You hit the enemy for" + "" + playerAttack + "" + "damage!";
+                        enemyHpLbl.Text = enemyHitpoints.ToString();
+                        player1Turn = false;
+                        enemyAttackTime();
+                        deathCheck();
+                    }
+                }
+                if (control == true)
+                {
+                    playerAccuracy = playerAcc.Next(1, 10);
+                    if (playerAccuracy > 8)
+                    {
+                        missLbl.Text = "Player 1, You Missed!";
+                        player1Turn = false;
+                        enemyAttackTime();
+                        deathCheck();
+                    }
+                    if (playerAccuracy < 9)
+                    {
+                        playerAttack = bigAttack.Next(2, 5);
+                        enemyHitpoints -= playerAttack + strengthBuff;
+                        missLbl.Text = "You hit the enemy for" + "" + (playerAttack + strengthBuff) + "" + "damage!";
                         enemyHpLbl.Text = enemyHitpoints.ToString();
                         player1Turn = false;
                         enemyAttackTime();
@@ -606,12 +665,28 @@ namespace csharp2020
                         deathCheck();
                     }
                 }
-                if (defensive == true && playerHitpoints < 81)
+                if (defensive == true && playerHitpoints < 76)
                 {
                     playerHeal = playerAcc.Next(3, 5);
                     playerHitpoints += playerHeal;
                     missLbl.Text = "You healed for" + "" + playerHeal + "" + "damage!";
                     userHpLbl.Text = playerHitpoints.ToString();
+                    player1Turn = false;
+                    enemyAttackTime();
+                    deathCheck();
+                }
+                if (sneaky == true)
+                {
+                    strengthBuff += 1;
+                    missLbl.Text = "Buffed Player 1's Strength!";
+                    player1Turn = false;
+                    enemyAttackTime();
+                    deathCheck();
+                }
+                if (control == true)
+                {
+                    playerDefense += 1;
+                    missLbl.Text = "Buffed Player 1's Defense!";
                     player1Turn = false;
                     enemyAttackTime();
                     deathCheck();
@@ -623,11 +698,12 @@ namespace csharp2020
         {
             if (player1Turn == true)
             {
-                if (offensive == true)
+                if (offensive == true && strengthBuffCount >= 1)
                 {
                     strengthBuff += 1;
                     missLbl.Text = "Buffed Player 1's Strength!";
                     player1Turn = false;
+                    strengthBuffCount -= 1;
                     enemyAttackTime();
                     deathCheck();
                 }
@@ -639,7 +715,22 @@ namespace csharp2020
                     enemyAttackTime();
                     deathCheck();
                 }
-
+                if (sneaky == true)
+                {
+                    accuracyBuff += 1;
+                    missLbl.Text = "Buffed Player 1's Accuracy!";
+                    player1Turn = false;
+                    enemyAttackTime();
+                    deathCheck();
+                }
+                if (control == true)
+                {
+                    strengthBuff += 1;
+                    missLbl.Text = "Buffed Player 1's Strength!";
+                    player1Turn = false;
+                    enemyAttackTime();
+                    deathCheck();
+                }
             }
         }
 
@@ -689,6 +780,24 @@ namespace csharp2020
                         deathCheck();
                     }
                 }
+                if (sneaky == true && playerHitpoints < 31)
+                {
+                    playerHeal = playerAcc.Next(2, 3);
+                    playerHitpoints += playerHeal;
+                    missLbl.Text = "You healed for" + "" + playerHeal + "" + "damage!";
+                    userHpLbl.Text = playerHitpoints.ToString();
+                    player1Turn = false;
+                    enemyAttackTime();
+                    deathCheck();
+                }
+                if (control == true)
+                {
+                    strengthBuff += 1;
+                    missLbl.Text = "Buffed Player 1's Strength!";
+                    player1Turn = false;
+                    enemyAttackTime();
+                    deathCheck();
+                }
             }
         }
 
@@ -720,7 +829,8 @@ namespace csharp2020
                 MessageBox.Show("Congratulations! You killed the planet! Try a harder difficulty!");
                 if (hard == true)
                 {
-                   // BossBattle == true;
+                    // BossBattle == true;
+                   
                 }
                 resetGame();
             }
@@ -774,11 +884,11 @@ namespace csharp2020
             }
             if (control == true)
             {
-                //
+                MessageBox.Show("Decent Attack - decent damage and high accuracy, Defense Buff - buffs defense (max 2), Accuracy Buff - buffs accuracy (max 2), Strength Buff - buffs strength (max 2).");
             }
             if(sneaky == true)
             {
-                //
+                MessageBox.Show("Pounce - high damage and decent accuracy, Accuracy Buff - buffs accuracy (max 2), Strength Buff - buffs strength (max 2), Weak Heal - heals for a little bit.");
             }
         }
 
