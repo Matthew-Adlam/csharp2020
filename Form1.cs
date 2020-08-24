@@ -37,6 +37,8 @@ namespace csharp2020
         public bool hard = false;
         public bool player1Turn;
         public bool player2Turn;
+        public bool classSelectionMenu = false;
+        public bool difficultySelectionMenu = false;
 
         string move;
         string name;
@@ -60,6 +62,7 @@ namespace csharp2020
         public int strengthBuff = 0;
         public int strengthBuffCount = 2;
         public int defenseBuffCount = 2;
+        public int accuracyBuffCount = 2;
         public int wound = 3;
 
         int lives;
@@ -116,6 +119,7 @@ namespace csharp2020
             missLbl.Visible = false;
             instructLbl.Visible = false;
             waitLbl.Visible = false;
+            backBtn.Visible = false;
         }
 
 
@@ -164,7 +168,8 @@ namespace csharp2020
             defButton.Visible = true;
             sneakyBtn.Visible = true;
             classLbl.Visible = true;
-
+            classSelectionMenu = true;
+            difficultySelectionMenu = false;
         }
 
         private void normalFButton_Click(object sender, EventArgs e)
@@ -191,6 +196,8 @@ namespace csharp2020
             defButton.Visible = true;
             sneakyBtn.Visible = true;
             classLbl.Visible = true;
+            classSelectionMenu = true;
+            difficultySelectionMenu = false;
         }
 
         private void hardFButton_Click(object sender, EventArgs e)
@@ -217,6 +224,8 @@ namespace csharp2020
             defButton.Visible = true;
             sneakyBtn.Visible = true;
             classLbl.Visible = true;
+            classSelectionMenu = true;
+            difficultySelectionMenu = false;
         }
 
         private void settingsButton_Click(object sender, EventArgs e)
@@ -238,6 +247,7 @@ namespace csharp2020
             easyFButton.Enabled = true;
             mediumFButton.Enabled = true;
             hardFButton.Enabled = true;
+            difficultySelectionMenu = true;
         }
 
         private void stopButton_Click(object sender, EventArgs e)
@@ -372,6 +382,9 @@ namespace csharp2020
             move5.Text = "Run Away!";
             strengthBuff = 0;
             playerDefense = 0;
+            strengthBuffCount = 2;
+            accuracyBuffCount = 2;
+            defenseBuffCount = 2;
             userHpLbl.Text = playerHitpoints.ToString();
             enemyHpLbl.Text = enemyHitpoints.ToString();
             controlBtn.Visible = false;
@@ -494,135 +507,11 @@ namespace csharp2020
             }
 
         }
-        void enemyAttackTime()
-        {
-            waitLbl.Visible = true;
-            move1.Enabled = false;
-            move2.Enabled = false;
-            move3.Enabled = false;
-            move4.Enabled = false;
-            move5.Enabled = false;
-
-            Thread.Sleep(2000);
-            if (easy == true)
-            {
-                enemyAccuracy = enemyMoveRand.Next(1, 12);
-
-                if (enemyAccuracy > 10)
-                {
-                    enemyMissLbl.Text = "The enemy missed!";
-                    player1Turn = true;
-                    playerAttackTime();
-                    deathCheck();
-                }
-                if (enemyAccuracy < 9)
-                {
-                    enemyAttack = enemyMoveRand.Next(3, 8);
-                    playerHitpoints -= enemyAttack - playerDefense;
-                    enemyMissLbl.Text = "You were hit by the enemy for" + "" + (enemyAttack - playerDefense) + "" + "damage!";
-                    userHpLbl.Text = playerHitpoints.ToString();
-                    player1Turn = true;
-                    playerAttackTime();
-                    deathCheck();
-                }
-                if (enemyAccuracy > 8 && enemyAccuracy < 11 && enemyHitpoints < 51)
-                {
-                    enemyHeal = enemyMoveRand.Next(5, 7);
-                    enemyHitpoints += enemyHeal;
-                    if (enemyHitpoints > 50)
-                    {
-                        enemyHitpoints = 50;
-                        enemyMissLbl.Text = "The enemy healed to full health!";
-                    }
-                    else
-                    {
-                        enemyMissLbl.Text = "The enemy healed for" + "" + enemyHeal + "" + "damage!";
-                    }
-                    enemyHpLbl.Text = enemyHitpoints.ToString();
-                    player1Turn = true;
-                    playerAttackTime();
-                    deathCheck();
-                }
-            }
-            if (medium == true )
-            {
-                enemyAccuracy = enemyMoveRand.Next(1, 12);
-
-                if (enemyAccuracy > 10)
-                {
-                    enemyMissLbl.Text = "The enemy missed!";
-                    player1Turn = true;
-                    playerAttackTime();
-                    deathCheck();
-                }
-                if (enemyAccuracy < 9)
-                {
-                    enemyAttack = enemyMoveRand.Next(4, 9);
-                    playerHitpoints -= enemyAttack;
-                    enemyMissLbl.Text = "You were hit by the enemy for" + "" + enemyAttack + "" + "damage!";
-                    userHpLbl.Text = playerHitpoints.ToString();
-                    player1Turn = true;
-                    playerAttackTime();
-                    deathCheck();
-                }
-                if (enemyAccuracy > 8 && enemyAccuracy < 11 && enemyHitpoints < 66)
-                {
-                    enemyHeal = enemyMoveRand.Next(6, 8);
-                    enemyHitpoints += enemyHeal;
-                    if (enemyHitpoints > 65)
-                    {
-                        enemyHitpoints = 65;
-                        enemyMissLbl.Text = "The enemy healed to full health!";
-                    }
-                    else
-                    {
-                        enemyMissLbl.Text = "The enemy healed for" + "" + enemyHeal + "" + "damage!";
-                    }
-                    enemyHpLbl.Text = enemyHitpoints.ToString();
-                    player1Turn = true;
-                    playerAttackTime();
-                    deathCheck();
-                }             
-            }
-            if (hard == true)
-            {
-                enemyAccuracy = enemyMoveRand.Next(1, 12);
-
-                if (enemyAccuracy < 9)
-                {
-                    enemyAttack = enemyMoveRand.Next(6, 9);
-                    playerHitpoints -= enemyAttack;
-                    enemyMissLbl.Text = "You were hit by the enemy for" + "" + enemyAttack + "" + "damage!";
-                    userHpLbl.Text = playerHitpoints.ToString();
-                    player1Turn = true;
-                    playerAttackTime();
-                    deathCheck();
-                }
-                if (enemyAccuracy > 10 && enemyAccuracy < 13 && enemyHitpoints < 81)
-                {
-                    enemyHeal = enemyMoveRand.Next(7, 9);
-                    enemyHitpoints += enemyHeal;
-                    if (enemyHitpoints > 65)
-                    {
-                        enemyHitpoints = 65;
-                        enemyMissLbl.Text = "The enemy healed to full health!";
-                    }
-                    else
-                    {
-                        enemyMissLbl.Text = "The enemy healed for" + "" + enemyHeal + "" + "damage!";
-                    }
-                    enemyHpLbl.Text = enemyHitpoints.ToString();
-                    player1Turn = true;
-                    playerAttackTime();
-                    deathCheck();
-                }
-            }
-        }
+  
 
         void playerAttackTime()
         {
             waitLbl.Visible = false;
-            Thread.Sleep(500);
             player1Turn = true;
             move1.Enabled = true;
             move2.Enabled = true;
@@ -675,19 +564,23 @@ namespace csharp2020
                     enemyAttackTime();
                     deathCheck();
                 }
-                if (sneaky == true)
+                if (sneaky == true && strengthBuffCount >= 1)
                 {
                     strengthBuff += 1;
                     missLbl.Text = "Buffed Player 1's Strength!";
                     player1Turn = false;
+                    strengthBuffCount -= 1;
+                    move3.Text = "Strength Buff" + "" + strengthBuffCount + "" + "left!";
                     enemyAttackTime();
                     deathCheck();
                 }
-                if (control == true)
+                if (control == true && defenseBuffCount >= 1)
                 {
                     playerDefense += 1;
                     missLbl.Text = "Buffed Player 1's Defense!";
                     player1Turn = false;
+                    defenseBuffCount -= 1;
+                    move3.Text = "Defense Buff" + "" + defenseBuffCount + "" + "left!";
                     enemyAttackTime();
                     deathCheck();
                 }
@@ -704,30 +597,37 @@ namespace csharp2020
                     missLbl.Text = "Buffed Player 1's Strength!";
                     player1Turn = false;
                     strengthBuffCount -= 1;
+                    move3.Text = "Strength Buff" + "" + strengthBuffCount + "" + "left!";
                     enemyAttackTime();
                     deathCheck();
                 }
-                if (defensive == true )
+                if (defensive == true && defenseBuffCount >= 1)
                 {
                     playerDefense += 1;
                     missLbl.Text = "Buffed Player 1's Defense!";
                     player1Turn = false;
+                    defenseBuffCount -= 1;
+                    move3.Text = "Defense Buff" + "" + defenseBuffCount + "" + "left!";
                     enemyAttackTime();
                     deathCheck();
                 }
-                if (sneaky == true)
+                if (sneaky == true && accuracyBuffCount >= 1)
                 {
                     accuracyBuff += 1;
                     missLbl.Text = "Buffed Player 1's Accuracy!";
                     player1Turn = false;
+                    accuracyBuffCount -= 1;
+                    move3.Text = "Accuracy Buff" + "" + accuracyBuffCount + "" + "left!";
                     enemyAttackTime();
                     deathCheck();
                 }
-                if (control == true)
+                if (control == true && accuracyBuffCount >= 1)
                 {
                     strengthBuff += 1;
-                    missLbl.Text = "Buffed Player 1's Strength!";
+                    missLbl.Text = "Buffed Player 1's Accuracy!";
                     player1Turn = false;
+                    strengthBuffCount -= 1;
+                    move3.Text = "Accuracy Buff" + "" + accuracyBuffCount + "" + "left!";
                     enemyAttackTime();
                     deathCheck();
                 }
@@ -790,11 +690,13 @@ namespace csharp2020
                     enemyAttackTime();
                     deathCheck();
                 }
-                if (control == true)
+                if (control == true && strengthBuffCount >= 1)
                 {
                     strengthBuff += 1;
                     missLbl.Text = "Buffed Player 1's Strength!";
                     player1Turn = false;
+                    strengthBuffCount -= 1;
+                    move3.Text = "Strength Buff" + "" + strengthBuffCount + "" + "left!";
                     enemyAttackTime();
                     deathCheck();
                 }
@@ -827,11 +729,6 @@ namespace csharp2020
                 move4.Enabled = false;
                 move5.Enabled = false;
                 MessageBox.Show("Congratulations! You killed the planet! Try a harder difficulty!");
-                if (hard == true)
-                {
-                    // BossBattle == true;
-                   
-                }
                 resetGame();
             }
             if (playerHitpoints == 0 || playerHitpoints < 0)
@@ -910,6 +807,35 @@ namespace csharp2020
             control = true;
             MessageBox.Show("Control Class. A bit of everything.");
             conBtn.Visible = true;
+        }
+
+        private void TmrMoves_Tick(object sender, EventArgs e)
+        {
+            TmrMoves.Enabled = false;
+        }
+
+        private void backBtn_Click(object sender, EventArgs e)
+        {
+            if (difficultySelectionMenu == true)
+            {
+                startButton.Visible = true;
+                instructButton.Visible = true;
+                instructLbl.Visible = true;
+                TxtName.Visible = true;
+                lblName.Visible = true;
+                settingsButton.Visible = true;
+                instructLbl.Visible = true;
+                bossyLbl.Visible = true;
+                quitGame.Visible = true;
+            }
+            if (classSelectionMenu == true)
+            {
+                lblDifficulty.Visible = false;
+                easyFButton.Visible = false;
+                mediumFButton.Visible = false;
+                hardFButton.Visible = false;
+                backBtn.Visible = true;
+            }
         }
     }
 }

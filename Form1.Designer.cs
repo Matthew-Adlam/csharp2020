@@ -43,7 +43,6 @@
             this.instructButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.settingsButton = new System.Windows.Forms.Button();
-            this.controlBtn = new System.Windows.Forms.Button();
             this.offBtn = new System.Windows.Forms.Button();
             this.defButton = new System.Windows.Forms.Button();
             this.sneakyBtn = new System.Windows.Forms.Button();
@@ -69,6 +68,9 @@
             this.TmrShip = new System.Windows.Forms.Timer(this.components);
             this.TmrPlanet = new System.Windows.Forms.Timer(this.components);
             this.waitLbl = new System.Windows.Forms.Label();
+            this.TmrMoves = new System.Windows.Forms.Timer(this.components);
+            this.controlBtn = new System.Windows.Forms.Button();
+            this.backBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.alien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.planetAi)).BeginInit();
             this.SuspendLayout();
@@ -218,21 +220,10 @@
             this.settingsButton.UseVisualStyleBackColor = false;
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
-            // controlBtn
-            // 
-            this.controlBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.controlBtn.Location = new System.Drawing.Point(256, 371);
-            this.controlBtn.Name = "controlBtn";
-            this.controlBtn.Size = new System.Drawing.Size(166, 50);
-            this.controlBtn.TabIndex = 19;
-            this.controlBtn.Text = "Control";
-            this.controlBtn.UseVisualStyleBackColor = true;
-            this.controlBtn.Click += new System.EventHandler(this.controlBtn_Click);
-            // 
             // offBtn
             // 
             this.offBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.offBtn.Location = new System.Drawing.Point(256, 174);
+            this.offBtn.Location = new System.Drawing.Point(256, 136);
             this.offBtn.Name = "offBtn";
             this.offBtn.Size = new System.Drawing.Size(166, 50);
             this.offBtn.TabIndex = 20;
@@ -243,7 +234,7 @@
             // defButton
             // 
             this.defButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.defButton.Location = new System.Drawing.Point(256, 239);
+            this.defButton.Location = new System.Drawing.Point(256, 206);
             this.defButton.Name = "defButton";
             this.defButton.Size = new System.Drawing.Size(166, 50);
             this.defButton.TabIndex = 21;
@@ -254,7 +245,7 @@
             // sneakyBtn
             // 
             this.sneakyBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sneakyBtn.Location = new System.Drawing.Point(256, 304);
+            this.sneakyBtn.Location = new System.Drawing.Point(256, 272);
             this.sneakyBtn.Name = "sneakyBtn";
             this.sneakyBtn.Size = new System.Drawing.Size(166, 50);
             this.sneakyBtn.TabIndex = 22;
@@ -266,7 +257,7 @@
             // 
             this.classLbl.AutoSize = true;
             this.classLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.classLbl.Location = new System.Drawing.Point(81, 127);
+            this.classLbl.Location = new System.Drawing.Point(81, 92);
             this.classLbl.Name = "classLbl";
             this.classLbl.Size = new System.Drawing.Size(584, 24);
             this.classLbl.TabIndex = 23;
@@ -277,7 +268,7 @@
             // 
             this.conBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.conBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.conBtn.Location = new System.Drawing.Point(256, 437);
+            this.conBtn.Location = new System.Drawing.Point(256, 444);
             this.conBtn.Name = "conBtn";
             this.conBtn.Size = new System.Drawing.Size(166, 50);
             this.conBtn.TabIndex = 24;
@@ -368,7 +359,7 @@
             // move1
             // 
             this.move1.BackColor = System.Drawing.Color.Red;
-            this.move1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.move1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.move1.Location = new System.Drawing.Point(48, 317);
             this.move1.Name = "move1";
             this.move1.Size = new System.Drawing.Size(166, 50);
@@ -380,7 +371,7 @@
             // move2
             // 
             this.move2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.move2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.move2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.move2.Location = new System.Drawing.Point(256, 317);
             this.move2.Name = "move2";
             this.move2.Size = new System.Drawing.Size(166, 50);
@@ -392,7 +383,7 @@
             // move3
             // 
             this.move3.BackColor = System.Drawing.Color.Yellow;
-            this.move3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.move3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.move3.Location = new System.Drawing.Point(462, 317);
             this.move3.Name = "move3";
             this.move3.Size = new System.Drawing.Size(166, 50);
@@ -404,7 +395,7 @@
             // move4
             // 
             this.move4.BackColor = System.Drawing.Color.Lime;
-            this.move4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.move4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.move4.Location = new System.Drawing.Point(48, 389);
             this.move4.Name = "move4";
             this.move4.Size = new System.Drawing.Size(166, 53);
@@ -416,7 +407,7 @@
             // move5
             // 
             this.move5.BackColor = System.Drawing.Color.DodgerBlue;
-            this.move5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.move5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.move5.Location = new System.Drawing.Point(256, 389);
             this.move5.Name = "move5";
             this.move5.Size = new System.Drawing.Size(166, 53);
@@ -428,7 +419,7 @@
             // moveInfo
             // 
             this.moveInfo.BackColor = System.Drawing.Color.Fuchsia;
-            this.moveInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.moveInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.moveInfo.Location = new System.Drawing.Point(462, 389);
             this.moveInfo.Name = "moveInfo";
             this.moveInfo.Size = new System.Drawing.Size(166, 53);
@@ -462,7 +453,7 @@
             this.quitGame.BackColor = System.Drawing.Color.Blue;
             this.quitGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.quitGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quitGame.Location = new System.Drawing.Point(210, 350);
+            this.quitGame.Location = new System.Drawing.Point(210, 360);
             this.quitGame.Name = "quitGame";
             this.quitGame.Size = new System.Drawing.Size(267, 92);
             this.quitGame.TabIndex = 41;
@@ -488,11 +479,39 @@
             this.waitLbl.TabIndex = 42;
             this.waitLbl.Text = "Please wait, the enemy is deciding!";
             // 
+            // TmrMoves
+            // 
+            this.TmrMoves.Interval = 3000;
+            this.TmrMoves.Tick += new System.EventHandler(this.TmrMoves_Tick);
+            // 
+            // controlBtn
+            // 
+            this.controlBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.controlBtn.Location = new System.Drawing.Point(256, 333);
+            this.controlBtn.Name = "controlBtn";
+            this.controlBtn.Size = new System.Drawing.Size(166, 50);
+            this.controlBtn.TabIndex = 19;
+            this.controlBtn.Text = "Control";
+            this.controlBtn.UseVisualStyleBackColor = true;
+            this.controlBtn.Click += new System.EventHandler(this.controlBtn_Click);
+            // 
+            // backBtn
+            // 
+            this.backBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.backBtn.Location = new System.Drawing.Point(256, 389);
+            this.backBtn.Name = "backBtn";
+            this.backBtn.Size = new System.Drawing.Size(166, 50);
+            this.backBtn.TabIndex = 43;
+            this.backBtn.Text = "Back";
+            this.backBtn.UseVisualStyleBackColor = true;
+            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 489);
+            this.Controls.Add(this.backBtn);
             this.Controls.Add(this.waitLbl);
             this.Controls.Add(this.quitGame);
             this.Controls.Add(this.enemyMissLbl);
@@ -557,7 +576,6 @@
         private System.Windows.Forms.Label LblFightUserHp;
         private System.Windows.Forms.Button defensiveChoice;
         private System.Windows.Forms.Button confirmBtn;
-        private System.Windows.Forms.Button controlBtn;
         private System.Windows.Forms.Button offBtn;
         private System.Windows.Forms.Button defButton;
         private System.Windows.Forms.Button sneakyBtn;
@@ -583,6 +601,9 @@
         private System.Windows.Forms.Timer TmrShip;
         private System.Windows.Forms.Timer TmrPlanet;
         private System.Windows.Forms.Label waitLbl;
+        private System.Windows.Forms.Timer TmrMoves;
+        private System.Windows.Forms.Button controlBtn;
+        private System.Windows.Forms.Button backBtn;
     }
 }
 
