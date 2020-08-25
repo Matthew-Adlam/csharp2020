@@ -10,6 +10,7 @@ namespace csharp2020
     {
            public void enemyAttackTime()
             {
+               deathCheck();
                 TmrMoves.Enabled = true;
 
                 waitLbl.Visible = true;

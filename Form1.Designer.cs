@@ -198,6 +198,8 @@
             this.instructButton.Text = "Instructions";
             this.instructButton.UseVisualStyleBackColor = false;
             this.instructButton.Click += new System.EventHandler(this.instructButton_Click);
+            this.instructButton.MouseLeave += new System.EventHandler(this.instructButton_MouseLeave);
+            this.instructButton.MouseHover += new System.EventHandler(this.instructButton_MouseHover);
             // 
             // label1
             // 
@@ -219,6 +221,8 @@
             this.settingsButton.Text = "Start Game!";
             this.settingsButton.UseVisualStyleBackColor = false;
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            this.settingsButton.MouseLeave += new System.EventHandler(this.settingsButton_MouseLeave);
+            this.settingsButton.MouseHover += new System.EventHandler(this.settingsButton_MouseHover);
             // 
             // offBtn
             // 
@@ -460,6 +464,8 @@
             this.quitGame.Text = "Quit Game";
             this.quitGame.UseVisualStyleBackColor = false;
             this.quitGame.Click += new System.EventHandler(this.quitGame_Click);
+            this.quitGame.MouseLeave += new System.EventHandler(this.quitGame_MouseLeave);
+            this.quitGame.MouseHover += new System.EventHandler(this.quitGame_MouseHover);
             // 
             // TmrShip
             // 
@@ -498,7 +504,7 @@
             // backBtn
             // 
             this.backBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.backBtn.Location = new System.Drawing.Point(256, 389);
+            this.backBtn.Location = new System.Drawing.Point(-2, 437);
             this.backBtn.Name = "backBtn";
             this.backBtn.Size = new System.Drawing.Size(166, 50);
             this.backBtn.TabIndex = 43;
