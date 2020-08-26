@@ -119,10 +119,10 @@ namespace csharp2020
             enemyMissLbl.Visible = false;
             missLbl.Visible = false;
             instructLbl.Visible = false;
-            waitLbl.Visible = false;
             backBtn.Visible = false;
             TxtName.Visible = false;
             lblName.Visible = false;
+            tutorialBox.Visible = false;
         }
 
 
@@ -139,9 +139,17 @@ namespace csharp2020
 
         private void instructButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("In this game, you engage in a 1v1 versus the AI in a duel! Click the buttons to perform moves to kill the planet before it kills you! (Health down to 0)");
-            MessageBox.Show("When you click Start, select a class and jump in! Click the moves to perform them on the planet, or click the Move Info button if you are not sure.");
-            MessageBox.Show("If you want to earn a reward boost for Easy difficulty, play the bonus game - dodge the planets until you get to 100 points!");
+            tutorialBox.Visible = true;
+
+            MessageBox.Show("This is the tutorial.");
+            instructButton.Visible = false;
+            instructLbl.Visible = false;
+            TxtName.Visible = false;
+            lblName.Visible = false;
+            settingsButton.Visible = false;
+            instructLbl.Visible = false;
+            bossyLbl.Visible = false;
+            quitGame.Visible = false;
         }
 
 
@@ -182,7 +190,7 @@ namespace csharp2020
             easy = false;
             medium = true;
             hard = false;
-            MessageBox.Show("Selected Medium.");
+            MessageBox.Show("Selected Normal.");
             startButton.Visible = false;
             instructButton.Visible = false;
             TxtName.Visible = false;
@@ -784,6 +792,7 @@ namespace csharp2020
             easyFButton.Enabled = true;
             mediumFButton.Enabled = true;
             hardFButton.Enabled = true;
+            backBtn.Visible = true;
 
             planetAi.Visible = false;
             alien.Visible = false;
@@ -913,8 +922,18 @@ namespace csharp2020
         {
             quitGame.BackColor = Color.Blue;
         }
+
+        public void tutorialBox_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void tmrTutorial_Tick(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+
 
 //pastebin
 //            codeRedeemer.Enabled = false;

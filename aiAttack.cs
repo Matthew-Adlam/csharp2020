@@ -13,7 +13,6 @@ namespace csharp2020
                deathCheck();
                 TmrMoves.Enabled = true;
 
-                waitLbl.Visible = true;
                 move1.Enabled = false;
                 move2.Enabled = false;
                 move3.Enabled = false;

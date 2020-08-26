@@ -50,8 +50,6 @@
             this.conBtn = new System.Windows.Forms.Button();
             this.bossyLbl = new System.Windows.Forms.Label();
             this.instructLbl = new System.Windows.Forms.Label();
-            this.alien = new System.Windows.Forms.PictureBox();
-            this.planetAi = new System.Windows.Forms.PictureBox();
             this.userhealthLbl = new System.Windows.Forms.Label();
             this.enemyhealthLbl = new System.Windows.Forms.Label();
             this.userHpLbl = new System.Windows.Forms.Label();
@@ -67,12 +65,16 @@
             this.quitGame = new System.Windows.Forms.Button();
             this.TmrShip = new System.Windows.Forms.Timer(this.components);
             this.TmrPlanet = new System.Windows.Forms.Timer(this.components);
-            this.waitLbl = new System.Windows.Forms.Label();
             this.TmrMoves = new System.Windows.Forms.Timer(this.components);
             this.controlBtn = new System.Windows.Forms.Button();
             this.backBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.alien)).BeginInit();
+            this.tutorialBox = new System.Windows.Forms.PictureBox();
+            this.planetAi = new System.Windows.Forms.PictureBox();
+            this.alien = new System.Windows.Forms.PictureBox();
+            this.tmrTutorial = new System.Windows.Forms.Timer(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.tutorialBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.planetAi)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alien)).BeginInit();
             this.SuspendLayout();
             // 
             // UserHp
@@ -195,7 +197,7 @@
             this.instructButton.Name = "instructButton";
             this.instructButton.Size = new System.Drawing.Size(267, 92);
             this.instructButton.TabIndex = 8;
-            this.instructButton.Text = "Instructions";
+            this.instructButton.Text = "Tutorial";
             this.instructButton.UseVisualStyleBackColor = false;
             this.instructButton.Click += new System.EventHandler(this.instructButton_Click);
             this.instructButton.MouseLeave += new System.EventHandler(this.instructButton_MouseLeave);
@@ -299,26 +301,6 @@
             this.instructLbl.Size = new System.Drawing.Size(484, 25);
             this.instructLbl.TabIndex = 25;
             this.instructLbl.Text = "Click the Settings button to modify game settings.";
-            // 
-            // alien
-            // 
-            this.alien.BackgroundImage = global::csharp2020.Properties.Resources.alien1;
-            this.alien.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.alien.Location = new System.Drawing.Point(100, 187);
-            this.alien.Name = "alien";
-            this.alien.Size = new System.Drawing.Size(114, 69);
-            this.alien.TabIndex = 26;
-            this.alien.TabStop = false;
-            // 
-            // planetAi
-            // 
-            this.planetAi.BackgroundImage = global::csharp2020.Properties.Resources.planet1;
-            this.planetAi.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.planetAi.Location = new System.Drawing.Point(462, 187);
-            this.planetAi.Name = "planetAi";
-            this.planetAi.Size = new System.Drawing.Size(114, 69);
-            this.planetAi.TabIndex = 27;
-            this.planetAi.TabStop = false;
             // 
             // userhealthLbl
             // 
@@ -475,16 +457,6 @@
             // 
             this.TmrPlanet.Enabled = true;
             // 
-            // waitLbl
-            // 
-            this.waitLbl.AutoSize = true;
-            this.waitLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.waitLbl.Location = new System.Drawing.Point(182, 279);
-            this.waitLbl.Name = "waitLbl";
-            this.waitLbl.Size = new System.Drawing.Size(304, 24);
-            this.waitLbl.TabIndex = 42;
-            this.waitLbl.Text = "Please wait, the enemy is deciding!";
-            // 
             // TmrMoves
             // 
             this.TmrMoves.Interval = 3000;
@@ -512,13 +484,49 @@
             this.backBtn.UseVisualStyleBackColor = true;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
+            // tutorialBox
+            // 
+            this.tutorialBox.BackgroundImage = global::csharp2020.Properties.Resources.tutorial1;
+            this.tutorialBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tutorialBox.Location = new System.Drawing.Point(-2, -1);
+            this.tutorialBox.Name = "tutorialBox";
+            this.tutorialBox.Size = new System.Drawing.Size(703, 488);
+            this.tutorialBox.TabIndex = 44;
+            this.tutorialBox.TabStop = false;
+            this.tutorialBox.Click += new System.EventHandler(this.tutorialBox_Click);
+            // 
+            // planetAi
+            // 
+            this.planetAi.BackgroundImage = global::csharp2020.Properties.Resources.planet1;
+            this.planetAi.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.planetAi.Location = new System.Drawing.Point(462, 187);
+            this.planetAi.Name = "planetAi";
+            this.planetAi.Size = new System.Drawing.Size(114, 69);
+            this.planetAi.TabIndex = 27;
+            this.planetAi.TabStop = false;
+            // 
+            // alien
+            // 
+            this.alien.BackgroundImage = global::csharp2020.Properties.Resources.alien1;
+            this.alien.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.alien.Location = new System.Drawing.Point(100, 187);
+            this.alien.Name = "alien";
+            this.alien.Size = new System.Drawing.Size(114, 69);
+            this.alien.TabIndex = 26;
+            this.alien.TabStop = false;
+            // 
+            // tmrTutorial
+            // 
+            this.tmrTutorial.Interval = 6000;
+            this.tmrTutorial.Tick += new System.EventHandler(this.tmrTutorial_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 489);
+            this.Controls.Add(this.tutorialBox);
             this.Controls.Add(this.backBtn);
-            this.Controls.Add(this.waitLbl);
             this.Controls.Add(this.quitGame);
             this.Controls.Add(this.enemyMissLbl);
             this.Controls.Add(this.missLbl);
@@ -558,8 +566,9 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
-            ((System.ComponentModel.ISupportInitialize)(this.alien)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tutorialBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.planetAi)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.alien)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -606,10 +615,11 @@
         private System.Windows.Forms.Button quitGame;
         private System.Windows.Forms.Timer TmrShip;
         private System.Windows.Forms.Timer TmrPlanet;
-        private System.Windows.Forms.Label waitLbl;
         private System.Windows.Forms.Timer TmrMoves;
         private System.Windows.Forms.Button controlBtn;
         private System.Windows.Forms.Button backBtn;
+        private System.Windows.Forms.PictureBox tutorialBox;
+        private System.Windows.Forms.Timer tmrTutorial;
     }
 }
 

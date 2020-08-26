@@ -59,6 +59,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Spaceship.cs" />
+    <Compile Include="tutorial.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +99,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\missile_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tutorial1.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tutorial2.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tutorial3.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tutorial4.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tutorial5.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tutorial6.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
