@@ -68,11 +68,10 @@
             this.TmrMoves = new System.Windows.Forms.Timer(this.components);
             this.controlBtn = new System.Windows.Forms.Button();
             this.backBtn = new System.Windows.Forms.Button();
-            this.tutorialBox = new System.Windows.Forms.PictureBox();
             this.planetAi = new System.Windows.Forms.PictureBox();
             this.alien = new System.Windows.Forms.PictureBox();
             this.tmrTutorial = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.tutorialBox)).BeginInit();
+            this.difficultyLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.planetAi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alien)).BeginInit();
             this.SuspendLayout();
@@ -484,17 +483,6 @@
             this.backBtn.UseVisualStyleBackColor = true;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
-            // tutorialBox
-            // 
-            this.tutorialBox.BackgroundImage = global::csharp2020.Properties.Resources.tutorial1;
-            this.tutorialBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.tutorialBox.Location = new System.Drawing.Point(-2, -1);
-            this.tutorialBox.Name = "tutorialBox";
-            this.tutorialBox.Size = new System.Drawing.Size(703, 488);
-            this.tutorialBox.TabIndex = 44;
-            this.tutorialBox.TabStop = false;
-            this.tutorialBox.Click += new System.EventHandler(this.tutorialBox_Click);
-            // 
             // planetAi
             // 
             this.planetAi.BackgroundImage = global::csharp2020.Properties.Resources.planet1;
@@ -517,15 +505,25 @@
             // 
             // tmrTutorial
             // 
-            this.tmrTutorial.Interval = 6000;
+            this.tmrTutorial.Interval = 1000;
             this.tmrTutorial.Tick += new System.EventHandler(this.tmrTutorial_Tick);
+            // 
+            // difficultyLbl
+            // 
+            this.difficultyLbl.AutoSize = true;
+            this.difficultyLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.difficultyLbl.Location = new System.Drawing.Point(157, 410);
+            this.difficultyLbl.Name = "difficultyLbl";
+            this.difficultyLbl.Size = new System.Drawing.Size(352, 24);
+            this.difficultyLbl.TabIndex = 44;
+            this.difficultyLbl.Text = "This changes how hard the enemy AI is. ";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 489);
-            this.Controls.Add(this.tutorialBox);
+            this.Controls.Add(this.difficultyLbl);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.quitGame);
             this.Controls.Add(this.enemyMissLbl);
@@ -566,7 +564,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
-            ((System.ComponentModel.ISupportInitialize)(this.tutorialBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.planetAi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.alien)).EndInit();
             this.ResumeLayout(false);
@@ -618,8 +615,8 @@
         private System.Windows.Forms.Timer TmrMoves;
         private System.Windows.Forms.Button controlBtn;
         private System.Windows.Forms.Button backBtn;
-        private System.Windows.Forms.PictureBox tutorialBox;
         private System.Windows.Forms.Timer tmrTutorial;
+        private System.Windows.Forms.Label difficultyLbl;
     }
 }
 

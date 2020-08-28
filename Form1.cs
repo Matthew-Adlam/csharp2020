@@ -122,7 +122,7 @@ namespace csharp2020
             backBtn.Visible = false;
             TxtName.Visible = false;
             lblName.Visible = false;
-            tutorialBox.Visible = false;
+            difficultyLbl.Visible = false;
         }
 
 
@@ -139,17 +139,7 @@ namespace csharp2020
 
         private void instructButton_Click(object sender, EventArgs e)
         {
-            tutorialBox.Visible = true;
-
-            MessageBox.Show("This is the tutorial.");
-            instructButton.Visible = false;
-            instructLbl.Visible = false;
-            TxtName.Visible = false;
-            lblName.Visible = false;
-            settingsButton.Visible = false;
-            instructLbl.Visible = false;
-            bossyLbl.Visible = false;
-            quitGame.Visible = false;
+            MessageBox.Show("Welcome! The object of this game is to reduce your enemy's hitpoints to 0, before they reduce yours to 0. Performing moves is the way to do so. If you want to know what the moves do, see the move info button in game, or the button on the class selection menu.");
         }
 
 
@@ -182,6 +172,7 @@ namespace csharp2020
             classLbl.Visible = true;
             classSelectionMenu = true;
             difficultySelectionMenu = false;
+            difficultyLbl.Visible = false;
         }
 
         private void normalFButton_Click(object sender, EventArgs e)
@@ -211,6 +202,7 @@ namespace csharp2020
             classLbl.Visible = true;
             classSelectionMenu = true;
             difficultySelectionMenu = false;
+            difficultyLbl.Visible = false;
         }
 
         private void hardFButton_Click(object sender, EventArgs e)
@@ -240,6 +232,7 @@ namespace csharp2020
             classLbl.Visible = true;
             classSelectionMenu = true;
             difficultySelectionMenu = false;
+            difficultyLbl.Visible = false;
         }
 
         private void settingsButton_Click(object sender, EventArgs e)
@@ -264,6 +257,7 @@ namespace csharp2020
             mediumFButton.Enabled = true;
             hardFButton.Enabled = true;
             difficultySelectionMenu = true;
+            difficultyLbl.Visible = true;
         }
 
         private void stopButton_Click(object sender, EventArgs e)
@@ -882,6 +876,7 @@ namespace csharp2020
                 mediumFButton.Visible = true;
                 hardFButton.Visible = true;
                 backBtn.Visible = true;
+                difficultyLbl.Visible = true;
 
                 controlBtn.Visible = false;
                 offBtn.Visible = false;
@@ -929,7 +924,7 @@ namespace csharp2020
 
         private void tmrTutorial_Tick(object sender, EventArgs e)
         {
-
+   //
         }
     }
 }
