@@ -19,7 +19,7 @@ namespace csharp2020
 {
     public partial class Form1 : Form
     {
-
+        // declares variables, not all necessary but most are
         Graphics g; //declare a graphics object called g
         Planet[] planet = new Planet[10];
         Random yspeed = new Random();
@@ -40,6 +40,7 @@ namespace csharp2020
         public bool player2Turn;
         public bool classSelectionMenu = false;
         public bool difficultySelectionMenu = false;
+        public bool gameEnd = false;
 
         string move;
         string name;
@@ -86,6 +87,7 @@ namespace csharp2020
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // sets up what I need on my home page
             lblDifficulty.Visible = false;
             startButton.Visible = false;
             easyFButton.Visible = false;
@@ -120,9 +122,11 @@ namespace csharp2020
             missLbl.Visible = false;
             instructLbl.Visible = false;
             backBtn.Visible = false;
-            TxtName.Visible = false;
-            lblName.Visible = false;
             difficultyLbl.Visible = false;
+            loseLbl.Visible = false;
+            winLbl.Visible = false;
+            exitLbl.Visible = false;
+            nameLbl.Visible = false;
         }
 
 
@@ -139,7 +143,7 @@ namespace csharp2020
 
         private void instructButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Welcome! The object of this game is to reduce your enemy's hitpoints to 0, before they reduce yours to 0. Performing moves is the way to do so. If you want to know what the moves do, see the move info button in game, or the button on the class selection menu.");
+            MessageBox.Show("Welcome! The object of this game is to reduce your enemy's hitpoints to 0, before they reduce yours to 0. Performing moves is the way to do so. If you want to know what the moves do, see the move info button in game.");
         }
 
 
@@ -156,6 +160,7 @@ namespace csharp2020
             instructButton.Visible = false;
             TxtName.Visible = false;
             lblName.Visible = false;
+            nameLbl.Visible = false;
             settingsButton.Visible = false;
             instructLbl.Visible = false;
 
@@ -186,6 +191,7 @@ namespace csharp2020
             instructButton.Visible = false;
             TxtName.Visible = false;
             lblName.Visible = false;
+            nameLbl.Visible = false;
             settingsButton.Visible = false;
             instructLbl.Visible = false;
 
@@ -216,6 +222,7 @@ namespace csharp2020
             instructButton.Visible = false;
             TxtName.Visible = false;
             lblName.Visible = false;
+            nameLbl.Visible = false;
             settingsButton.Visible = false;
             instructLbl.Visible = false;
             backBtn.Visible = true;
@@ -269,32 +276,9 @@ namespace csharp2020
         private void TxtName_TextChanged(object sender, EventArgs e)
         {
             {
-
                 string context = TxtName.Text;
-                bool isletter = true;
-                //for loop checks for letters as characters are entered
-                for (int i = 0; i < context.Length; i++)
-                {
-                    if (!char.IsLetter(context[i]))// if current character not a letter
-                    {
-                        isletter = false;//make isletter false
-                        break; // exit the for loop
-                    }
-
-                }
-
-                // if not a letter clear the textbox and focus on it
-                // to enter name again
-                if (isletter == false)
-                {
-                    TxtName.Clear();
-                    TxtName.Focus();
-                    MessageBox.Show("Please enter a valid username - one with only letters");
-                }
-                else
-                {
-                    context = name;
-                }
+                name = context;
+            
             }
         }
 
@@ -433,7 +417,7 @@ namespace csharp2020
                     playerAccuracy = playerAcc.Next(1, 10);
                     if (playerAccuracy > 6)
                     {
-                        missLbl.Text = "Player 1, You Missed!";
+                        missLbl.Text = name + "," + "" + "You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
                      
@@ -454,7 +438,7 @@ namespace csharp2020
                     playerAccuracy = playerAcc.Next(1, 10);
                     if (playerAccuracy > 8)
                     {
-                        missLbl.Text = "Player 1, You Missed!";
+                        missLbl.Text = name + "," + "" + "You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
                         
@@ -479,7 +463,7 @@ namespace csharp2020
                     }
                     if (playerAccuracy > 8)
                     {
-                        missLbl.Text = "Player 1, You Missed!";
+                        missLbl.Text = name + "," + "" + "You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
                         
@@ -500,7 +484,7 @@ namespace csharp2020
                     playerAccuracy = playerAcc.Next(1, 10);
                     if (playerAccuracy > 8)
                     {
-                        missLbl.Text = "Player 1, You Missed!";
+                        missLbl.Text = name + "," + "" + "You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
                       
@@ -550,7 +534,7 @@ namespace csharp2020
                     playerAccuracy = playerAcc.Next(1, 10);
                     if (playerAccuracy > 8)
                     {
-                        missLbl.Text = "Player 1, You Missed!";
+                        missLbl.Text = name + "," + "" + "You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
                        
@@ -581,7 +565,7 @@ namespace csharp2020
                     playerAccuracy = playerAcc.Next(1, 10);
                     if (playerAccuracy > 2)
                     {
-                        missLbl.Text = "Player 1, You Missed!";
+                        missLbl.Text = name + "," + "" + "You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
 
@@ -600,7 +584,7 @@ namespace csharp2020
                 if (control == true && defenseBuffCount >= 1)
                 {
                     playerDefense += 1;
-                    missLbl.Text = "Buffed Player 1's Defense!";
+                    missLbl.Text = "Buffed" + "" + name + "'s" + "" + " Defense!";
                     player1Turn = false;
                     defenseBuffCount -= 1;
                     move3.Text = "Defense Buff" + "" + defenseBuffCount + "" + "left!";
@@ -617,7 +601,7 @@ namespace csharp2020
                 if (offensive == true && strengthBuffCount >= 1)
                 {
                     strengthBuff += 1;
-                    missLbl.Text = "Buffed Player 1's Strength!";
+                    missLbl.Text = "Buffed" + "" + name + "'s" + "" + " Strength!";
                     player1Turn = false;
                     strengthBuffCount -= 1;
                     move3.Text = "Strength Buff" + "" + strengthBuffCount + "" + "left!";
@@ -627,7 +611,7 @@ namespace csharp2020
                 if (defensive == true && defenseBuffCount >= 1)
                 {
                     playerDefense += 1;
-                    missLbl.Text = "Buffed Player 1's Defense!";
+                    missLbl.Text = "Buffed" + "" + name + "'s" + "" + " Defense!";
                     player1Turn = false;
                     defenseBuffCount -= 1;
                     move3.Text = "Defense Buff" + "" + defenseBuffCount + "" + "left!";
@@ -637,7 +621,7 @@ namespace csharp2020
                 if (sneaky == true && accuracyBuffCount >= 1)
                 {
                     accuracyBuff += 1;
-                    missLbl.Text = "Buffed Player 1's Accuracy!";
+                    missLbl.Text = "Buffed" + "" + name + "'s" + "" + " Accuracy!";
                     player1Turn = false;
                     accuracyBuffCount -= 1;
                     move3.Text = "Accuracy Buff" + "" + accuracyBuffCount + "" + "left!";
@@ -666,7 +650,7 @@ namespace csharp2020
                     playerAccuracy = playerAcc.Next(1, 10);
                     if (playerAccuracy > 3)
                     {
-                        missLbl.Text = "Player 1, You Missed!";
+                        missLbl.Text = name + "," + "" + "You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
                        
@@ -687,7 +671,7 @@ namespace csharp2020
                     playerAccuracy = playerAcc.Next(1, 10);
                     if (playerAccuracy > 7)
                     {
-                        missLbl.Text = "Player 1, You Missed!";
+                        missLbl.Text = name + "," + "" + "You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
                       
@@ -718,7 +702,7 @@ namespace csharp2020
                     playerAccuracy = playerAcc.Next(1, 10);
                     if (playerAccuracy > 3)
                     {
-                        missLbl.Text = "Player 1, You Missed!";
+                        missLbl.Text = name + "," + "" + "You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
 
@@ -762,8 +746,9 @@ namespace csharp2020
                 move3.Enabled = false;
                 move4.Enabled = false;
                 move5.Enabled = false;
-                MessageBox.Show("Congratulations! You killed the planet! Try a harder difficulty!");
-                resetGame();
+                winLbl.Visible = true;
+                exitLbl.Visible = true;
+                gameEnd = true;
             }
             if (playerHitpoints == 0 || playerHitpoints < 0)
             {
@@ -773,8 +758,9 @@ namespace csharp2020
                 move3.Enabled = false;
                 move4.Enabled = false;
                 move5.Enabled = false;
-                MessageBox.Show("You Died! Better luck next time!");
-                resetGame();
+                loseLbl.Visible = true;
+                exitLbl.Visible = true;
+                gameEnd = true;
             }
         }
         public void resetGame()
@@ -787,6 +773,7 @@ namespace csharp2020
             mediumFButton.Enabled = true;
             hardFButton.Enabled = true;
             backBtn.Visible = true;
+            difficultyLbl.Visible = true;
 
             planetAi.Visible = false;
             alien.Visible = false;
@@ -802,6 +789,9 @@ namespace csharp2020
             moveInfo.Visible = false;
             enemyMissLbl.Visible = false;
             missLbl.Visible = false;
+            winLbl.Visible = false;
+            loseLbl.Visible = false;
+            exitLbl.Visible = false;
         }
 
         private void moveInfo_Click(object sender, EventArgs e)
@@ -868,6 +858,7 @@ namespace csharp2020
                 hardFButton.Visible = false;
                 hardFButton.Visible = false;
                 backBtn.Visible = false;
+                difficultyLbl.Visible = false;
             }
             if (classSelectionMenu == true)
             {
@@ -925,6 +916,18 @@ namespace csharp2020
         private void tmrTutorial_Tick(object sender, EventArgs e)
         {
    //
+        }
+
+        private void tmrWin_Tick(object sender, EventArgs e)
+        {
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyData == Keys.Escape)
+            {
+                resetGame();
+            }
         }
     }
 }

@@ -72,6 +72,11 @@
             this.alien = new System.Windows.Forms.PictureBox();
             this.tmrTutorial = new System.Windows.Forms.Timer(this.components);
             this.difficultyLbl = new System.Windows.Forms.Label();
+            this.winLbl = new System.Windows.Forms.Label();
+            this.loseLbl = new System.Windows.Forms.Label();
+            this.tmrWin = new System.Windows.Forms.Timer(this.components);
+            this.exitLbl = new System.Windows.Forms.Label();
+            this.nameLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.planetAi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.alien)).BeginInit();
             this.SuspendLayout();
@@ -518,11 +523,64 @@
             this.difficultyLbl.TabIndex = 44;
             this.difficultyLbl.Text = "This changes how hard the enemy AI is. ";
             // 
+            // winLbl
+            // 
+            this.winLbl.AutoSize = true;
+            this.winLbl.BackColor = System.Drawing.Color.Transparent;
+            this.winLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.winLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.winLbl.Location = new System.Drawing.Point(123, 183);
+            this.winLbl.Name = "winLbl";
+            this.winLbl.Size = new System.Drawing.Size(433, 108);
+            this.winLbl.TabIndex = 45;
+            this.winLbl.Text = "You Win!";
+            // 
+            // loseLbl
+            // 
+            this.loseLbl.AutoSize = true;
+            this.loseLbl.BackColor = System.Drawing.Color.Transparent;
+            this.loseLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loseLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.loseLbl.Location = new System.Drawing.Point(123, 183);
+            this.loseLbl.Name = "loseLbl";
+            this.loseLbl.Size = new System.Drawing.Size(475, 108);
+            this.loseLbl.TabIndex = 46;
+            this.loseLbl.Text = "You Lose!";
+            // 
+            // tmrWin
+            // 
+            this.tmrWin.Interval = 3000;
+            this.tmrWin.Tick += new System.EventHandler(this.tmrWin_Tick);
+            // 
+            // exitLbl
+            // 
+            this.exitLbl.AutoSize = true;
+            this.exitLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.exitLbl.Location = new System.Drawing.Point(115, 291);
+            this.exitLbl.Name = "exitLbl";
+            this.exitLbl.Size = new System.Drawing.Size(461, 55);
+            this.exitLbl.TabIndex = 47;
+            this.exitLbl.Text = "Press Escape to exit";
+            // 
+            // nameLbl
+            // 
+            this.nameLbl.AutoSize = true;
+            this.nameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLbl.Location = new System.Drawing.Point(11, 136);
+            this.nameLbl.Name = "nameLbl";
+            this.nameLbl.Size = new System.Drawing.Size(96, 24);
+            this.nameLbl.TabIndex = 48;
+            this.nameLbl.Text = "Welcome,";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 489);
+            this.Controls.Add(this.nameLbl);
+            this.Controls.Add(this.exitLbl);
+            this.Controls.Add(this.loseLbl);
+            this.Controls.Add(this.winLbl);
             this.Controls.Add(this.difficultyLbl);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.quitGame);
@@ -562,6 +620,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.planetAi)).EndInit();
@@ -617,6 +676,11 @@
         private System.Windows.Forms.Button backBtn;
         private System.Windows.Forms.Timer tmrTutorial;
         private System.Windows.Forms.Label difficultyLbl;
+        private System.Windows.Forms.Label winLbl;
+        private System.Windows.Forms.Label loseLbl;
+        private System.Windows.Forms.Timer tmrWin;
+        private System.Windows.Forms.Label exitLbl;
+        private System.Windows.Forms.Label nameLbl;
     }
 }
 
