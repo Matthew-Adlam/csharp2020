@@ -43,7 +43,7 @@ namespace csharp2020
         public bool gameEnd = false;
 
         string move;
-        string name;
+        string name = "user";
 
         bool left;
         bool right;
@@ -77,12 +77,6 @@ namespace csharp2020
         public Form1()
         {
             InitializeComponent();
-
-            for (int i = 0; i < 10; i++)
-            {
-                int x = 10 + (i * 60);
-                planet[i] = new Planet(x);
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -129,7 +123,7 @@ namespace csharp2020
             nameLbl.Visible = false;
         }
 
-
+        // next 2 are not necessary
         public void stopGame()
         {
             startButton.Enabled = true;
@@ -140,14 +134,15 @@ namespace csharp2020
         {
         }
 
-
+        // shows instructions
         private void instructButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Welcome! The object of this game is to reduce your enemy's hitpoints to 0, before they reduce yours to 0. Performing moves is the way to do so. If you want to know what the moves do, see the move info button in game.");
+            MessageBox.Show("WARNING - Don't heal at maximum health because it won't let you, and you miss a turn.");
         }
 
 
-
+        // the different difficulties, moves to next screen, and sets the enemy health based on player selection
         private void easyFButton_Click(object sender, EventArgs e)
         {
             fighterMode = true;
@@ -179,7 +174,7 @@ namespace csharp2020
             difficultySelectionMenu = false;
             difficultyLbl.Visible = false;
         }
-
+        // the different difficulties, moves to next screen, and sets the enemy health based on player selection
         private void normalFButton_Click(object sender, EventArgs e)
         {
             fighterMode = true;
@@ -210,7 +205,7 @@ namespace csharp2020
             difficultySelectionMenu = false;
             difficultyLbl.Visible = false;
         }
-
+        // the different difficulties, moves to next screen, and sets the enemy health based on player selection
         private void hardFButton_Click(object sender, EventArgs e)
         {
             fighterMode = true;
@@ -241,7 +236,7 @@ namespace csharp2020
             difficultySelectionMenu = false;
             difficultyLbl.Visible = false;
         }
-
+// the settings button - the Start Game button
         private void settingsButton_Click(object sender, EventArgs e)
         {
             // Start Game Button
@@ -266,13 +261,13 @@ namespace csharp2020
             difficultySelectionMenu = true;
             difficultyLbl.Visible = true;
         }
-
+        // ignore
         private void stopButton_Click(object sender, EventArgs e)
         {
             startButton.Enabled = true;
             startButton.Visible = true;
         }
-
+        // the name text box - records user entry
         private void TxtName_TextChanged(object sender, EventArgs e)
         {
             {
@@ -281,7 +276,7 @@ namespace csharp2020
             
             }
         }
-
+        // ignore next 3 blocks
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
             // spaceship.MoveSpaceship(e.X);
@@ -301,7 +296,7 @@ namespace csharp2020
         {
             this.Invalidate();
         }
-
+        // offensive button clicked
         private void offBtn_Click(object sender, EventArgs e)
         {
             offensive = true;
@@ -311,7 +306,7 @@ namespace csharp2020
             MessageBox.Show("Offensive Class. Very attack focused.");
             conBtn.Visible = true;
         }
-
+        // confirm button - checks what class player chose and set game to those
         private void conBtn_Click(object sender, EventArgs e)
         {
             if (offensive == true)
@@ -322,7 +317,7 @@ namespace csharp2020
                 startGame();
             }
             if (defensive == true)
-            {
+            { // default class is offensive, so if not offensive change move names
                 MessageBox.Show("Selected Defensive Class.");
                 playerHitpoints = 75;
                 enemyHitpoints = 50; // ^^^ and this subject to change due to difficulty
@@ -334,7 +329,7 @@ namespace csharp2020
                 startGame();              
             }
             if (sneaky == true)
-            {
+            {// default class is offensive, so if not offensive change move names
                 MessageBox.Show("Selected Sneaky Class.");
                 playerHitpoints = 30;
                 enemyHitpoints = 50; // ^^^ and this subject to change due to difficulty
@@ -346,7 +341,7 @@ namespace csharp2020
                 startGame();
             }
             if (control == true)
-            {
+            {// default class is offensive, so if not offensive change move names
                 MessageBox.Show("Selected Control Class.");
                 playerHitpoints = 60;
                 enemyHitpoints = 50; // ^^^ and this subject to change due to difficulty
@@ -360,7 +355,7 @@ namespace csharp2020
 
         }
         void startGame()
-        {
+        { // when game starts, set enemy hp, set default values and move to game screen
             if (easy == true)
             {
                 enemyHitpoints = 50;
@@ -399,6 +394,11 @@ namespace csharp2020
             move3.Visible = true;
             move4.Visible = true;
             move5.Visible = true;
+            move1.Enabled = true;
+            move2.Enabled = true;
+            move3.Enabled = true;
+            move4.Enabled = true;
+            move5.Enabled = true;
             moveInfo.Visible = true;
             missLbl.Visible = true;
             enemyMissLbl.Visible = true;
@@ -408,15 +408,16 @@ namespace csharp2020
         }
 
         private void move1_Click(object sender, EventArgs e)
-        {
+        { // if it is the players turn
             if (player1Turn == true)
-            {
+            { // if offensive class
                 if (offensive == true)
                 {
-                   
+                   // attacks with possibility of missing
                     playerAccuracy = playerAcc.Next(1, 10);
                     if (playerAccuracy > 6)
                     {
+                        // if player misses
                         missLbl.Text = name + "," + "" + "You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
@@ -424,6 +425,7 @@ namespace csharp2020
                     }
                     if (playerAccuracy < 7)
                     {
+                        // player attacks, changes enemy health, notifies player and passes turn to enemy
                         playerAttack = bigAttack.Next(6, 8);
                         enemyHitpoints -= playerAttack + strengthBuff;
                         missLbl.Text = "You hit the enemy for" + "" + (playerAttack + strengthBuff) + "" + "damage!";
@@ -434,10 +436,11 @@ namespace csharp2020
                     }
                 }
                 if (defensive == true)
-                {
+                { // if defensive class
                     playerAccuracy = playerAcc.Next(1, 10);
                     if (playerAccuracy > 8)
                     {
+                        // if player misses
                         missLbl.Text = name + "," + "" + "You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
@@ -445,6 +448,7 @@ namespace csharp2020
                     }
                     if (playerAccuracy < 9)
                     {
+                        // player attacks, changes enemy health, notifies player and passes turn to enemy
                         playerAttack = bigAttack.Next(2, 5);
                         enemyHitpoints -= playerAttack ;
                         missLbl.Text = "You hit the enemy for" + "" + playerAttack  + "" + "damage!";
@@ -455,14 +459,16 @@ namespace csharp2020
                     }
                 }
                 if (sneaky == true)
-                {
+                { // if sneaky class
                     playerAccuracy = playerAcc.Next(1, 10);
+                    // checks if player's accuracy is less than maximum - for sneaky class only
                     if (playerAccuracy < 11)
                     {
                         playerAccuracy += accuracyBuff;
                     }
                     if (playerAccuracy > 8)
                     {
+                        // if player misses
                         missLbl.Text = name + "," + "" + "You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
@@ -470,6 +476,7 @@ namespace csharp2020
                     }
                     if (playerAccuracy < 9)
                     {
+                        // player attacks, changes enemy health, notifies player and passes turn to enemy
                         playerAttack = 7;
                         enemyHitpoints -= playerAttack;
                         missLbl.Text = "You hit the enemy for" + "" + playerAttack + "" + "damage!";
@@ -480,10 +487,11 @@ namespace csharp2020
                     }
                 }
                 if (control == true)
-                {
+                { // if control class
                     playerAccuracy = playerAcc.Next(1, 10);
                     if (playerAccuracy > 8)
                     {
+                        // if player misses
                         missLbl.Text = name + "," + "" + "You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
@@ -491,6 +499,7 @@ namespace csharp2020
                     }
                     if (playerAccuracy < 9)
                     {
+                        // player attacks, changes enemy health, notifies player and passes turn to enemy
                         playerAttack = bigAttack.Next(2, 5);
                         enemyHitpoints -= playerAttack + strengthBuff;
                         missLbl.Text = "You hit the enemy for" + "" + (playerAttack + strengthBuff) + "" + "damage!";
@@ -504,7 +513,7 @@ namespace csharp2020
 
         }
   
-
+        // when its time for player to attack
         void playerAttackTime()
         {
             deathCheck();
@@ -513,7 +522,7 @@ namespace csharp2020
             move2.Enabled = true;
             move3.Enabled = true;
             move4.Enabled = true;
-            move5.Enabled = true;
+            TmrMoves.Enabled = false;
         }
 
         private void move2_Click(object sender, EventArgs e)
@@ -552,6 +561,7 @@ namespace csharp2020
                 }
                 if (defensive == true && playerHitpoints < 76)
                 {
+                    // heals if under max health
                     playerHeal = playerAcc.Next(3, 5);
                     playerHitpoints += playerHeal;
                     missLbl.Text = "You healed for" + "" + playerHeal + "" + "damage!";
@@ -583,11 +593,12 @@ namespace csharp2020
                 }
                 if (control == true && defenseBuffCount >= 1)
                 {
+                    // there is a limit to defenses, check if exceeded then buffs the defense
                     playerDefense += 1;
                     missLbl.Text = "Buffed" + "" + name + "'s" + "" + " Defense!";
                     player1Turn = false;
                     defenseBuffCount -= 1;
-                    move3.Text = "Defense Buff" + "" + defenseBuffCount + "" + "left!";
+                    move2.Text = "Defense Buff" + "" + defenseBuffCount + "" + "left!";
                     enemyAttackTime();
                     
                 }
@@ -726,7 +737,7 @@ namespace csharp2020
             MessageBox.Show("You ran from the planet!");
             resetGame();
         }
-
+        // sets class to defensive
         private void defButton_Click(object sender, EventArgs e)
         {
             offensive = false;
@@ -736,6 +747,7 @@ namespace csharp2020
             MessageBox.Show("Defensive Class. Very survival focused.");
             conBtn.Visible = true;
         }
+        // checks if a player has won/lost the game, and displays appropriate label
         public void deathCheck()
         {
             if (enemyHitpoints == 0 || enemyHitpoints < 0)
@@ -763,6 +775,7 @@ namespace csharp2020
                 gameEnd = true;
             }
         }
+        // resets the game to difficulty screen
         public void resetGame()
         {
             lblDifficulty.Visible = true;
@@ -793,7 +806,7 @@ namespace csharp2020
             loseLbl.Visible = false;
             exitLbl.Visible = false;
         }
-
+        // displays info about what the moves do
         private void moveInfo_Click(object sender, EventArgs e)
         {
             if(offensive == true)
@@ -813,7 +826,7 @@ namespace csharp2020
                 MessageBox.Show("Pounce - high damage and decent accuracy, Accuracy Buff - buffs accuracy (max 2), Knock Out - massive damage but low accuracy, Weak Heal - heals for a little bit.");
             }
         }
-
+        // selects sneaky class
         private void sneakyBtn_Click(object sender, EventArgs e)
         {
             offensive = false;
@@ -823,7 +836,7 @@ namespace csharp2020
             MessageBox.Show("Sneaky Class. Extremely good attack, but weaker on the defensive side.");
             conBtn.Visible = true;
         }
-
+        // selects control class
         private void controlBtn_Click(object sender, EventArgs e)
         {
             offensive = false;
@@ -833,12 +846,12 @@ namespace csharp2020
             MessageBox.Show("Control Class. A bit of everything.");
             conBtn.Visible = true;
         }
-
+        // controls enemy moves - the click too fast bug was a factor here, so this is irrelevant rn
         private void TmrMoves_Tick(object sender, EventArgs e)
         {
             TmrMoves.Enabled = false;
         }
-
+        // controls the multi use back button - depending on what screen it is on
         private void backBtn_Click(object sender, EventArgs e)
         {
             if (difficultySelectionMenu == true)
@@ -878,7 +891,7 @@ namespace csharp2020
 
             }
         }
-
+        // cosmetic effects
         private void settingsButton_MouseHover(object sender, EventArgs e)
         {
             settingsButton.BackColor = Color.Yellow;
@@ -908,7 +921,7 @@ namespace csharp2020
         {
             quitGame.BackColor = Color.Blue;
         }
-
+        // next 3 are irrelevant
         public void tutorialBox_Click(object sender, EventArgs e)
         {
         }
@@ -921,7 +934,7 @@ namespace csharp2020
         private void tmrWin_Tick(object sender, EventArgs e)
         {
         }
-
+        // end game label navigation
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyData == Keys.Escape)
