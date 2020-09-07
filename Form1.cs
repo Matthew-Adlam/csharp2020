@@ -562,7 +562,7 @@ namespace csharp2020
                 if (defensive == true && playerHitpoints < 76)
                 {
                     // heals if under max health
-                    playerHeal = playerAcc.Next(3, 5);
+                    playerHeal = playerAcc.Next(2, 4);
                     playerHitpoints += playerHeal;
                     missLbl.Text = "You healed for" + "" + playerHeal + "" + "damage!";
                     userHpLbl.Text = playerHitpoints.ToString();
@@ -680,14 +680,14 @@ namespace csharp2020
                 if (defensive == true)
                 {
                     playerAccuracy = playerAcc.Next(1, 10);
-                    if (playerAccuracy > 7)
+                    if (playerAccuracy > 5)
                     {
                         missLbl.Text = name + "," + "" + "You Missed!";
                         player1Turn = false;
                         enemyAttackTime();
                       
                     }
-                    if (playerAccuracy < 8)
+                    if (playerAccuracy < 6)
                     {
                         playerAttack = bigAttack.Next(6, 8);
                         enemyHitpoints -= playerAttack + strengthBuff;
@@ -700,7 +700,7 @@ namespace csharp2020
                 }
                 if (sneaky == true && playerHitpoints < 31)
                 {
-                    playerHeal = playerAcc.Next(2, 3);
+                    playerHeal = playerAcc.Next(1, 3);
                     playerHitpoints += playerHeal;
                     missLbl.Text = "You healed for" + "" + playerHeal + "" + "damage!";
                     userHpLbl.Text = playerHitpoints.ToString();
@@ -787,6 +787,7 @@ namespace csharp2020
             hardFButton.Enabled = true;
             backBtn.Visible = true;
             difficultyLbl.Visible = true;
+            difficultySelectionMenu = true;
 
             planetAi.Visible = false;
             alien.Visible = false;
